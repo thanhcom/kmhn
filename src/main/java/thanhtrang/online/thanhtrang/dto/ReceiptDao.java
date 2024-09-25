@@ -119,7 +119,7 @@ public class ReceiptDao {
 
     public static void main(String[] args) {
         ReceiptDao dao = new ReceiptDao();
-        dao.FindByCustomerPhone("096").forEach(action -> System.out.println("ID: " + action.getCustomer().getId() + "---Name :" + action.getCustomer().getName() + "----------  Ten trong  :" + action.getTkName()));
+        dao.FindByCustomerPhone("096").forEach(action -> System.out.println("ID: " + action.getCustomer().getEyeService().getLast().getEyesphl() + "---Name :" + action.getDate()+ "----------  Ten trong  :" + action.getTkName()));
     }
 
 }
