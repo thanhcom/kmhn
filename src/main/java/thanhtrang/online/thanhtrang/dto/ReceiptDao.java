@@ -13,6 +13,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import thanhtrang.online.thanhtrang.HibnateUtils;
+import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.Receipt;
 
 /**
@@ -36,10 +37,12 @@ public class ReceiptDao {
 
     public List<Receipt> FindByCustomerId(int CustomerId) {
         Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Receipt R WHERE R.customer.id=:cusid ORDER BY R.id DESC");
-        q.setParameter("cusid", CustomerId);
-        List<Receipt> list = q.getResultList();
-        return list;
+        Customer c = ss.get(Customer.class, CustomerId);
+        //Query q = ss.createQuery("FROM Receipt R WHERE R.customer.id=:cusid ORDER BY R.id DESC");
+        //q.setParameter("cusid", CustomerId);
+       //List<Receipt> list = q.getResultList();
+        List<Receipt> list1 = c.getReceipt();
+        return list1;
     }
 
     public List<Receipt> FindByCustomerName(String CustomerName) {
@@ -116,10 +119,33 @@ public class ReceiptDao {
         List<Receipt> list = q.getResultList();
         return list;
     }
+    
+    public void ReceiptAdd(Receipt R)
+    {
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.save(R);
+    }
+    
+    public void ReceiptEdit(Receipt R)
+    {
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.getTransaction().begin();
+       ss.save(R);
+       ss.getTransaction().commit();
+    }
+    
+    public void ReceiptRemove(Receipt R)
+    {
+        
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.getTransaction().begin();
+       ss.delete(R);
+       ss.getTransaction().commit();
+    }
 
     public static void main(String[] args) {
         ReceiptDao dao = new ReceiptDao();
-        dao.FindByCustomerPhone("096").forEach(action -> System.out.println("ID: " + action.getCustomer().getEyeService().getLast().getEyesphl() + "---Name :" + action.getDate()+ "----------  Ten trong  :" + action.getTkName()));
+        dao.FindByCustomerId(4).forEach(action -> System.out.println("ID: " + action.getCustomer().getEyeService().getLast().getEyesphl() + "---Name :" + action.getCustomer().getName()+ "----------  Ten trong  :" + action.getTkName()));
     }
 
 }
