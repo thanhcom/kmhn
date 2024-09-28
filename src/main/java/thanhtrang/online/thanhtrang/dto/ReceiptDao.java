@@ -44,6 +44,22 @@ public class ReceiptDao {
         List<Receipt> list1 = c.getReceipt();
         return list1;
     }
+    
+    public List<Receipt> FindByGkName(String GkName) {
+        Session ss = HibnateUtils.getFactory().openSession();
+         Query q = ss.createQuery("FROM Receipt R WHERE R.gkName LIKE :gkName ORDER BY R.id DESC");
+         q.setParameter("gkName", "%" + GkName + "%");
+         List<Receipt> list = q.getResultList();
+         return list;
+    }
+    
+    public List<Receipt> FindByTkName(String TkName) {
+        Session ss = HibnateUtils.getFactory().openSession();
+         Query q = ss.createQuery("FROM Receipt R WHERE R.tkName LIKE :tkName ORDER BY R.id DESC");
+         q.setParameter("tkName", "%" + TkName + "%");
+         List<Receipt> list = q.getResultList();
+         return list;
+    }
 
     public List<Receipt> FindByCustomerName(String CustomerName) {
         Session ss = HibnateUtils.getFactory().openSession();
@@ -145,7 +161,7 @@ public class ReceiptDao {
 
     public static void main(String[] args) {
         ReceiptDao dao = new ReceiptDao();
-        dao.FindByCustomerId(4).forEach(action -> System.out.println("ID: " + action.getCustomer().getEyeService().getLast().getEyesphl() + "---Name :" + action.getCustomer().getName()+ "----------  Ten trong  :" + action.getTkName()));
+        dao.FindByGkName("TK").forEach(action -> System.out.println("ID: " + action.getId() + "---Name :" + action.getCustomer().getName()+ "----------  Ten trong  :" + action.getTkName()));
     }
 
 }
