@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.EyeService;
+import thanhtrang.online.thanhtrang.Model.Receipt;
 
 /**
  *
@@ -75,6 +76,29 @@ public class EyeServiceDao {
         q.setParameter("eyedatetime", str);
         List<EyeService> list = q.getResultList();
         return list;
+    }
+    
+     public void EyeServiceAdd(EyeService R)
+    {
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.save(R);
+    }
+    
+    public void EyeServiceEdit(EyeService R)
+    {
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.getTransaction().begin();
+       ss.save(R);
+       ss.getTransaction().commit();
+    }
+    
+    public void EyeServiceRemove(EyeService R)
+    {
+        
+       Session ss = HibnateUtils.getFactory().openSession();
+       ss.getTransaction().begin();
+       ss.delete(R);
+       ss.getTransaction().commit();
     }
     
 }
