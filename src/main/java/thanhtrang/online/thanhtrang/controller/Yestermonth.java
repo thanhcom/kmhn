@@ -14,11 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.Customer;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
@@ -46,15 +42,8 @@ public class Yestermonth extends HttpServlet {
         calendar.add(Calendar.DATE, -1);  
         Date lastDayOfMonth = calendar.getTime();  
         DateFormat sdf = new SimpleDateFormat("yyyy-MM");  
-        DateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd"); 
-        String str1 = sdf.format(lastDayOfMonth)+"-01";
-        String str2 = sdf1.format(lastDayOfMonth);
-        Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date and R.date<=:date1 ORDER BY C.id DESC");
-        q.setParameter("date", str1);
-        q.setParameter("date1", str2);
-        List<Customer> listCustomer = q.getResultList();
-        request.setAttribute("listCustomer", listCustomer);
+        ReceiptDao rd= new ReceiptDao();
+        request.setAttribute("listCustomer", rd.FindByYesterMonth());
         request.setAttribute("datetime", sdf.format(lastDayOfMonth));
         request.getRequestDispatcher("yestermonth.jsp").forward(request, response);
     }

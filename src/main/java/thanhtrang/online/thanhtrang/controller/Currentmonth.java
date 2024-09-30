@@ -10,14 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.Customer;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
@@ -37,14 +30,15 @@ public class Currentmonth extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
         Instant now = Instant.now();
         String str = formatter.format(Date.from(now))+"-01";
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
         q.setParameter("date", str);
-        List<Customer> listCustomer = q.getResultList();
-        request.setAttribute("listCustomer", listCustomer);
+        List<Customer> listCustomer = q.getResultList();*/
+        ReceiptDao rd= new ReceiptDao();
+        request.setAttribute("listCustomer", rd.FindByCurrentMonth());
         request.getRequestDispatcher("currentmonth.jsp").forward(request, response);
     }
 

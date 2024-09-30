@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.Customer;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
@@ -43,12 +44,14 @@ public class Home extends HttpServlet {
             Instant now = Instant.now();
             Instant yesterday = now.minus(6, ChronoUnit.DAYS);
             String str = formatter.format(Date.from(yesterday));
-            
+            String str1 = formatter.format(Date.from(now));
+            /*
             Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
             q.setParameter("date", str);
-            List<Customer> listCustomer = q.getResultList();
+            List<Customer> listCustomer = q.getResultList();*/
+            ReceiptDao rd= new ReceiptDao();
             request.setAttribute("str", str);
-            request.setAttribute("listCustomer", listCustomer);
+            request.setAttribute("listCustomer", rd.FindByDaytoDay(str, str1));
             request.getRequestDispatcher("demo.jsp").forward(request, response);
     }
 

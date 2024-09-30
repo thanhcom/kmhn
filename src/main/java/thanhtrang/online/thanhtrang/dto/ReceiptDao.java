@@ -7,6 +7,7 @@ package thanhtrang.online.thanhtrang.dto;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -95,10 +96,22 @@ public class ReceiptDao {
         List<Receipt> list = q.getResultList();
         return list;
     }
+    
+     public List<Receipt> FindByYesterday() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Instant now = Instant.now();
+        Instant yesterday = now.minus(1, ChronoUnit.DAYS);
+        String str = formatter.format(Date.from(yesterday));
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("FROM Receipt WHERE date =:date ORDER BY id DESC");
+        q.setParameter("date", str);
+        List<Receipt> list = q.getResultList();
+        return list;
+    }
 
     public List<Receipt> FindByDaytoDay(String StartDate, String EndDate) {
         Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Receipt WHERE R.date >=:date and R.date<=:date1 ORDER BY id DESC");
+        Query q = ss.createQuery("FROM Receipt WHERE date >=:date and date<=:date1 ORDER BY id DESC");
         q.setParameter("date", StartDate);
         q.setParameter("date1", EndDate);
         List<Receipt> list = q.getResultList();
@@ -161,7 +174,7 @@ public class ReceiptDao {
 
     public static void main(String[] args) {
         ReceiptDao dao = new ReceiptDao();
-        dao.FindByGkName("TK").forEach(action -> System.out.println("ID: " + action.getId() + "---Name :" + action.getCustomer().getName()+ "----------  Ten trong  :" + action.getTkName()));
+        dao.FindByGkName("TK").forEach(action -> System.out.println("ID: " + action.getId() + "---Name :" + action.getCustomer().getEyeService().getLast().getEyeapproved()+ "----------  Ten trong  :" + action.getTkName()));
     }
 
 }

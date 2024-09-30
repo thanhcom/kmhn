@@ -95,35 +95,35 @@
                     <c:forEach var="item" items="${requestScope.listCustomer}">
 
                         <tr>
-                            <td class="text-uppercase text-danger fw-bold">${item.getName()}</td>
-                            <td>${item.getPhone()}</td>
-                            <td>${item.getReceipt().getLast().getGkName()}
-                                <c:if test="${item.getReceipt().getLast().getGkPrice()!=0}">
+                            <td class="text-uppercase text-danger fw-bold">${item.getCustomer().getName()}</td>
+                            <td>${item.getCustomer().getPhone()}</td>
+                            <td>${item.getGkName()}
+                                <c:if test="${item.getGkPrice()!=0}">
                                     <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getReceipt().getLast().getGkPrice()}" type = "number"/> 
+                                        <fmt:formatNumber value = "${item.getGkPrice()}" type = "number"/> 
                                     </span>
                                 </c:if> 
                             </td>
-                            <td>${item.getReceipt().getLast().getTkName()}
-                                <c:if test="${item.getReceipt().getLast().getTkPrice()!=0}">
+                            <td>${item.getTkName()}
+                                <c:if test="${item.getTkPrice()!=0}">
                                     <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getReceipt().getLast().getTkPrice()}" type = "number"/> 
+                                        <fmt:formatNumber value = "${item.getTkPrice()}" type = "number"/> 
                                     </span>
                                 </c:if> 
                             </td>
                             <td>
-                                <p>MP:<span class="badge text-bg-primary">${item.getEyeService().getLast().getEyesphr()}</span><span class="badge text-bg-info">${item.getEyeService().getLast().getEyecylr()==0?"":item.getEyeService().getLast().getEyecylr()}</span><span class="badge text-bg-danger">${item.getEyeService().getLast().getEyeaxr()==0?"":item.getEyeService().getLast().getEyeaxr()}</span></p>
-                                <p>MT:<span class="badge text-bg-primary">${item.getEyeService().getLast().getEyesphl()}</span><span class="badge text-bg-info">${item.getEyeService().getLast().getEyecyll()==0?"":item.getEyeService().getLast().getEyecyll()}</span><span class="badge text-bg-danger">${item.getEyeService().getLast().getEyeaxl()==0?"":item.getEyeService().getLast().getEyeaxl()}</span></p>
+                                <p>MP:<span class="badge text-bg-primary">${item.getCustomer().getEyeService().getLast().getEyesphr()}</span><span class="badge text-bg-info">${item.getCustomer().getEyeService().getLast().getEyecylr()==0?"":item.getCustomer().getEyeService().getLast().getEyecylr()}</span><span class="badge text-bg-danger">${item.getCustomer().getEyeService().getLast().getEyeaxr()==0?"":item.getCustomer().getEyeService().getLast().getEyeaxr()}</span></p>
+                                <p>MT:<span class="badge text-bg-primary">${item.getCustomer().getEyeService().getLast().getEyesphl()}</span><span class="badge text-bg-info">${item.getCustomer().getEyeService().getLast().getEyecyll()==0?"":item.getCustomer().getEyeService().getLast().getEyecyll()}</span><span class="badge text-bg-danger">${item.getCustomer().getEyeService().getLast().getEyeaxl()==0?"":item.getCustomer().getEyeService().getLast().getEyeaxl()}</span></p>
                             </td>
-                            <c:if test="${item.getReceipt().getLast().getPaymentMethod()==1}">
-                                <c:set var="countck" value="${countck + (item.getReceipt().getLast().getGkPrice()+item.getReceipt().getLast().getTkPrice())}" scope="page"/>
-                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getReceipt().getLast().getGkPrice()+item.getReceipt().getLast().getTkPrice()}" type = "number"/></td>   
+                            <c:if test="${item.getPaymentMethod()==1}">
+                                <c:set var="countck" value="${countck + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
+                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>   
                             </c:if>
-                            <c:if test="${item.getReceipt().getLast().getPaymentMethod()==0}">
-                                <c:set var="count" value="${count + (item.getReceipt().getLast().getGkPrice()+item.getReceipt().getLast().getTkPrice())}" scope="page"/>
-                                <td><fmt:formatNumber value = "${item.getReceipt().getLast().getGkPrice()+item.getReceipt().getLast().getTkPrice()}" type = "number"/></td>
+                            <c:if test="${item.getPaymentMethod()==0}">
+                                <c:set var="count" value="${count + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
+                                <td><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>
                             </c:if>
-                            <td>${item.getReceipt().getLast().getDate()}</td>
+                            <td>${item.getDate()}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -36,7 +36,7 @@ public class HoaDon extends HttpServlet {
             ReceiptDao d = new ReceiptDao();
             List<Receipt> list = d.FindAll();
             request.setAttribute("listCustomer", list);
-            request.getRequestDispatcher("demo_1.jsp").forward(request, response);
+            request.getRequestDispatcher("demo_2.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

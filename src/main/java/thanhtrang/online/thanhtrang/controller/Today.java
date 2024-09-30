@@ -10,13 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.Customer;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
@@ -36,14 +30,17 @@ public class Today extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = formatter.format(date);
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date =:date ORDER BY C.id DESC");
         q.setParameter("date", str);
         List<Customer> listCustomer = q.getResultList();
-        request.setAttribute("listCustomer", listCustomer);
+        */
+        
+        ReceiptDao rd= new ReceiptDao();
+        request.setAttribute("listCustomer", rd.FindByCurrentDay());
         request.getRequestDispatcher("today.jsp").forward(request, response);
     }
 
