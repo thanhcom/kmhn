@@ -94,7 +94,7 @@
                                         <td >Nữ </td>                                      
                             </c:if>
                             <td>${item.getReceipt().size()}</td>
-                            <td><a class="btn btn-outline-warning" role="button" aria-disabled="true" href="#">Chi Tiết </a></td>
+                            <td><a class="btn btn-outline-warning" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">Chi Tiết </a></td>
                         </tr>
                     </c:forEach>
                 </tbody>                

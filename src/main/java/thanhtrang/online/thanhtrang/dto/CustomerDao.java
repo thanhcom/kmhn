@@ -55,7 +55,7 @@ public class CustomerDao {
 
     public static void main(String[] args) {
         CustomerDao cdao = new CustomerDao();
-        cdao.FinByAge(18).forEach(action -> System.out.println(action.getReceipt().size()));
+        cdao.FinByAge(18).forEach(action -> System.out.println(action.getEyeService()));
     }
 
 }
