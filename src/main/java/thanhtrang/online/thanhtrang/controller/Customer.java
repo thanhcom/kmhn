@@ -5,14 +5,12 @@
 package thanhtrang.online.thanhtrang.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import thanhtrang.online.thanhtrang.dto.CustomerDao;
-import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
@@ -32,8 +30,7 @@ public class Customer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             CustomerDao cd=  new CustomerDao();
-            request.setAttribute("list", cd.FinAll());
+            request.setAttribute("list", CustomerDao.getInstance().FinAll());
             request.getRequestDispatcher("customer.jsp").forward(request, response);
     }
 

@@ -12,13 +12,28 @@ import org.hibernate.query.Query;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.EyeService;
-import thanhtrang.online.thanhtrang.Model.Receipt;
 
 /**
  *
  * @author thanhcom
  */
 public class EyeServiceDao {
+    
+     private static EyeServiceDao instance;
+    
+     public static EyeServiceDao getInstance()
+     {
+         if(instance ==null)
+         {
+             instance = new EyeServiceDao();
+         }
+         return instance;
+     }
+
+    private EyeServiceDao() {
+    }
+     
+     
 
     public List<EyeService> FindAll() {
         Session ss = HibnateUtils.getFactory().openSession();

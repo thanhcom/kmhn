@@ -5,7 +5,6 @@
 package thanhtrang.online.thanhtrang.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,8 +32,8 @@ public class HoaDon extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            ReceiptDao d = new ReceiptDao();
-            List<Receipt> list = d.FindAll();
+            
+            List<Receipt> list = ReceiptDao.getInstance().FindAll();
             request.setAttribute("listCustomer", list);
             request.getRequestDispatcher("demo_2.jsp").forward(request, response);
     }

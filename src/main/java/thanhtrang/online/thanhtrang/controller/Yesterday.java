@@ -10,15 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
@@ -48,8 +39,8 @@ public class Yesterday extends HttpServlet {
         Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date =:date ORDER BY C.id DESC");
         q.setParameter("date", str);
         List<Customer> listCustomer = q.getResultList();*/
-        ReceiptDao rd= new ReceiptDao();
-        request.setAttribute("listCustomer", rd.FindByYesterday());
+        
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByYesterday());
         request.getRequestDispatcher("yesterday.jsp").forward(request, response);
     }
 

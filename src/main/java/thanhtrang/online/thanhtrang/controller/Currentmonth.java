@@ -36,9 +36,8 @@ public class Currentmonth extends HttpServlet {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
         q.setParameter("date", str);
-        List<Customer> listCustomer = q.getResultList();*/
-        ReceiptDao rd= new ReceiptDao();
-        request.setAttribute("listCustomer", rd.FindByCurrentMonth());
+        List<Customer> listCustomer = q.getResultList();*/        
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByCurrentMonth());
         request.getRequestDispatcher("currentmonth.jsp").forward(request, response);
     }
 

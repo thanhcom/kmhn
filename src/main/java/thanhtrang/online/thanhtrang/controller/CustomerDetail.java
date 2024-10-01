@@ -31,8 +31,8 @@ public class CustomerDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String id = request.getParameter("id");
-            CustomerDao cd=  new CustomerDao();
-            request.setAttribute("customer", cd.FinById(Integer.parseInt(id)));
+            
+            request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(id)));
             request.getRequestDispatcher("customerbyid.jsp").forward(request, response);
     }
 

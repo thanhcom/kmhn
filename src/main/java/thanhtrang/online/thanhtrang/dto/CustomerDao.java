@@ -15,6 +15,22 @@ import thanhtrang.online.thanhtrang.Model.Customer;
  * @author thanhcom
  */
 public class CustomerDao {
+    
+    private static CustomerDao instance;
+    
+     public static CustomerDao getInstance()
+     {
+         if(instance ==null)
+         {
+             instance = new CustomerDao();
+         }
+         return instance;
+     }
+
+    private CustomerDao() {
+    }
+     
+     
 
     public List<Customer> FinAll() {
         Session ss = HibnateUtils.getFactory().openSession();

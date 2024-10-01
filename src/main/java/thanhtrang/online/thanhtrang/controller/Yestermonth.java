@@ -41,9 +41,8 @@ public class Yestermonth extends HttpServlet {
         calendar.set(Calendar.DAY_OF_MONTH, 1);  
         calendar.add(Calendar.DATE, -1);  
         Date lastDayOfMonth = calendar.getTime();  
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM");  
-        ReceiptDao rd= new ReceiptDao();
-        request.setAttribute("listCustomer", rd.FindByYesterMonth());
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM");         
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByYesterMonth());
         request.setAttribute("datetime", sdf.format(lastDayOfMonth));
         request.getRequestDispatcher("yestermonth.jsp").forward(request, response);
     }

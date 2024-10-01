@@ -22,7 +22,22 @@ import thanhtrang.online.thanhtrang.Model.Receipt;
  * @author thanhcom
  */
 public class ReceiptDao {
+    
+    private static ReceiptDao instance;
+    
+     public static ReceiptDao getInstance()
+     {
+         if(instance ==null)
+         {
+             instance = new ReceiptDao();
+         }
+         return instance;
+     }
 
+    private ReceiptDao() {
+    }
+    
+     
     public List<Receipt> FindAll() {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Receipt ORDER BY id DESC");

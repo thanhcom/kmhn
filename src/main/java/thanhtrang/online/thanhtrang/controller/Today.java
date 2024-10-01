@@ -39,8 +39,8 @@ public class Today extends HttpServlet {
         List<Customer> listCustomer = q.getResultList();
         */
         
-        ReceiptDao rd= new ReceiptDao();
-        request.setAttribute("listCustomer", rd.FindByCurrentDay());
+        
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByCurrentDay());
         request.getRequestDispatcher("today.jsp").forward(request, response);
     }
 
