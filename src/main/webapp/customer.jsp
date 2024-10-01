@@ -21,13 +21,6 @@
         <link href="https://cdn.datatables.net/v/bs5/dt-2.1.5/datatables.min.css" rel="stylesheet">
     </head>
     <body>
-        <%
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date();
-            String str = formatter.format(date);
-            // List<Customer> list = request.getAttribute("listCustomer")
-        %>
         <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark"> 
             <div class="container-fluid">
                 <a class="navbar-brand" href="home">Kính Mắt Hà  Nội</a>
@@ -72,70 +65,39 @@
         </nav>
         <div class="container-fluid">
 
-            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">${requestScope.str} --> <%=str%></span> </h1>
+            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Khách Hàng </span> </h1>
 
             <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
                 <thead>
                     <tr>
                         <th>Họ Tên</th>
                         <th>Số Điện Thoại </th>
-                        <th>Gọng Kính </th>
-                        <th>Tròng Kính </th>
-                        <th>Độ Kính </th>
-                        <th>Thành Tiền </th>
-                        <th>Thời Gian  </th>
+                        <th>Tuổi</th>
+                        <th>Giới Tính</th>
+                        <th>Hoá Đơn </th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <c:set var="countck" value="0" scope="page" />
                     <c:set var="count" value="0" scope="page" />
-                    <c:forEach var="item" items="${requestScope.listCustomer}">
+                    <c:forEach var="item" items="${requestScope.list}">
 
                         <tr>
-                            <td class="text-uppercase text-danger fw-bold">${item.getCustomer().getName()}</td>
-                            <td>${item.getCustomer().getPhone()}</td>
-                            <td>${item.getGkName()}
-                                <c:if test="${item.getGkPrice()!=0}">
-                                    <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getGkPrice()}" type = "number"/> 
-                                    </span>
-                                </c:if> 
-                            </td>
-                            <td>${item.getTkName()}
-                                <c:if test="${item.getTkPrice()!=0}">
-                                    <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getTkPrice()}" type = "number"/> 
-                                    </span>
-                                </c:if> 
-                            </td>
-                            <td>
-                                <p>MP:<span class="badge text-bg-primary">${item.getCustomer().getEyeService().getLast().getEyesphr()}</span><span class="badge text-bg-info">${item.getCustomer().getEyeService().getLast().getEyecylr()==0?"":item.getCustomer().getEyeService().getLast().getEyecylr()}</span><span class="badge text-bg-danger">${item.getCustomer().getEyeService().getLast().getEyeaxr()==0?"":item.getCustomer().getEyeService().getLast().getEyeaxr()}</span></p>
-                                <p>MT:<span class="badge text-bg-primary">${item.getCustomer().getEyeService().getLast().getEyesphl()}</span><span class="badge text-bg-info">${item.getCustomer().getEyeService().getLast().getEyecyll()==0?"":item.getCustomer().getEyeService().getLast().getEyecyll()}</span><span class="badge text-bg-danger">${item.getCustomer().getEyeService().getLast().getEyeaxl()==0?"":item.getCustomer().getEyeService().getLast().getEyeaxl()}</span></p>
-                            </td>
-                            <c:if test="${item.getPaymentMethod()==1}">
-                                <c:set var="countck" value="${countck + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
-                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>   
+                            <td class="text-uppercase text-danger fw-bold">${item.getName()}</td>
+                            <td >${item.getPhone()}</td>
+                            <td>${item.getAge()}</td>
+                            <c:if test="${item.getGender()!=0}">                                    
+                                        <td>Nam</td>                                   
+                            </c:if> 
+                            <c:if test="${item.getGender()==0}">                                    
+                                        <td >Nữ </td>                                      
                             </c:if>
-                            <c:if test="${item.getPaymentMethod()==0}">
-                                <c:set var="count" value="${count + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
-                                <td><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>
-                            </c:if>
-                            <td>${item.getDate()}</td>
+                            <td>${item.getReceipt().size()}</td>
+                            <td><a class="btn btn-outline-warning" role="button" aria-disabled="true" href="#">Chi Tiết </a></td>
                         </tr>
                     </c:forEach>
-                </tbody>
-                <tfoot>
-                    <tr> 
-                        <th>Chuyển Khoản</th>
-                        <th class="text-bg-warning"><fmt:formatNumber value = "${countck}" type = "number"/></th>
-                        <th>Tiền Mặt</th>
-                        <th ><fmt:formatNumber value = "${count}" type = "number"/></th>
-                        <th>Tổng </th>
-                        <th class="text-primary"><fmt:formatNumber value = "${count+countck}" type = "number"/></th>
-
-                    </tr>
-                </tfoot>
+                </tbody>                
             </table>           
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
