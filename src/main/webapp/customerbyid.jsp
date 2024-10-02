@@ -42,6 +42,10 @@
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
                         <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link" href="customer">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="other">Other</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -123,8 +127,7 @@
                 </tbody>                
             </table>      
             </div>
-            <br/>
-            <br/>
+            <br/>    
             <div class="border border-primary"> 
             <h1> <p  class=".text-danger text-center mt-2">Phần Đo Mắt </p> </h1>
             <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
@@ -156,7 +159,41 @@
                    
                 </tbody>                
             </table> 
-            </div>    
+            </div>  
+            <br/>
+            <div class="border border-primary"> 
+            <h1> <p  class=".text-danger text-center mt-2">Phần Dịch Vụ Khác </p> </h1>
+            <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Ngày Tháng </th>
+                        <th>Tên Dịch Vụ</th>
+                        <th>Số Tiền</th>
+                        <th>Hành Động </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="item" items="${customer.getOther()}">
+
+                        <tr>
+                            <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
+                           
+                            <td>${item.getServiceName()}</td>
+                            <c:if test="${item.getPaymentmethod()==1}">
+                                
+                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>   
+                            </c:if>
+                            <c:if test="${item.getPaymentmethod()==0}">
+                                
+                                <td><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>
+                            </c:if>
+                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Chỉnh Sửa</a><a class="btn btn-outline-danger" role="button" aria-disabled="true" href="#">Xoá</a></td>
+                        </tr>
+                    </c:forEach>
+                   
+                </tbody>                
+            </table> 
+            </div> 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/v/bs5/dt-2.1.5/datatables.min.js"></script>

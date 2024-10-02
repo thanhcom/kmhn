@@ -42,8 +42,12 @@
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
                         <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link active" href="customer">Khách Hàng</a>
+                        </li>
                             <a class="nav-link" href="other">Other</a>
                         </li>
+                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Chức Năng  
@@ -75,6 +79,7 @@
                         <th>Tuổi</th>
                         <th>Giới Tính</th>
                         <th>Hoá Đơn </th>
+                        <th>Dịch Vụ #</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +99,7 @@
                                         <td >Nữ </td>                                      
                             </c:if>
                             <td>${item.getReceipt().size()}</td>
+                            <td>${item.getOther().size()}</td>
                             <td><a class="btn btn-outline-warning" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">Chi Tiết </a></td>
                         </tr>
                     </c:forEach>

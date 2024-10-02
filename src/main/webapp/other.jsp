@@ -43,6 +43,10 @@
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
                         <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link" href="customer">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" href="">Other</a>
                         </li>
                         <li class="nav-item dropdown">

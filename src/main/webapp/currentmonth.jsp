@@ -48,6 +48,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
+                         <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link" href="customer">Khách Hàng</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="other">Other</a>
                         </li>
