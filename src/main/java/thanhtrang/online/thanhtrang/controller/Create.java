@@ -44,6 +44,7 @@ public class Create extends HttpServlet {
         
         c.setName(request.getParameter("name"));
         c.setPhone(request.getParameter("phone"));
+        c.setAddress(request.getParameter("address"));
         c.setGender(Integer.parseInt(request.getParameter("gender")));
         c.setAge(Integer.parseInt(request.getParameter("age")));
         ss.getTransaction().begin();

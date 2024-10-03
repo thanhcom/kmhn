@@ -60,8 +60,8 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" role="search" action="searchcustomer">
+                        <input name="username" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -100,7 +100,11 @@
                             </c:if>
                             <td>${item.getReceipt().size()}</td>
                             <td>${item.getOther().size()}</td>
-                            <td><a class="btn btn-outline-warning" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">Chi Tiết </a></td>
+                            <td>
+                                <a class="btn btn-outline-warning" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">Chi Tiết </a>
+                                <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="receiptbycustomer?id=${item.getId()}">HĐ</a>
+                                <a class="btn btn-outline-secondary" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">#</a></td>
+                            
                         </tr>
                     </c:forEach>
                 </tbody>                

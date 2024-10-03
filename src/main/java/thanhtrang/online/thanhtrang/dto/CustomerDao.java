@@ -47,8 +47,17 @@ public class CustomerDao {
     
      public List<Customer> FinByName(String Name) {
         Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Customer WHERE name LIKE :Name ORDER BY id DESC");
+        Query q = ss.createQuery("FROM Customer WHERE name LIKE :name ORDER BY id DESC");
         q.setParameter("name", "%" + Name + "%");
+        List<Customer> list = q.getResultList();
+        return list;
+    }
+     
+      public List<Customer> FinByNameAndPhone(String Name , String Phone) {
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("FROM Customer WHERE `name` LIKE :name OR phone LIKE :phone ORDER BY id DESC");
+        q.setParameter("name", "%" + Name + "%");
+        q.setParameter("phone", "%" + Phone + "%");
         List<Customer> list = q.getResultList();
         return list;
     }
@@ -71,7 +80,7 @@ public class CustomerDao {
 
     public static void main(String[] args) {
         CustomerDao cdao = new CustomerDao();
-        cdao.FinByAge(18).forEach(action -> System.out.println(action.getOther().size()));
+        cdao.FinByAge(18).forEach(action -> System.out.println(action.getGender()));
     }
 
 }

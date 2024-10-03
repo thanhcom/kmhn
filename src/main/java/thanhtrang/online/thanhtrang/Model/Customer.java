@@ -27,6 +27,7 @@ public class Customer implements Serializable{
     private int age;
     private String phone;
     private int gender;
+    private  String address;
     
     @OneToMany(mappedBy = "customer")
     private List<Other> Other;
@@ -103,6 +104,14 @@ public class Customer implements Serializable{
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
     
     

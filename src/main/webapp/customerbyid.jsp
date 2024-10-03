@@ -43,7 +43,7 @@
                         </li>
                         <li class="nav-item">
                             <li class="nav-item">
-                            <a class="nav-link" href="customer">Khách Hàng</a>
+                            <a class="nav-link active" href="customer">Khách Hàng</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="other">Other</a>

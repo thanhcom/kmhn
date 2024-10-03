@@ -69,40 +69,44 @@
             </div>
         </nav>
         <div class="container-fluid">
-
             <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Tạo Mới Đơn Kính</span> </h1>
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
                     <form action="create" method="post">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Họ Tên </label>
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Họ Tên</label>
                             <div class="col-sm-8">
-                                <input type="text" name="name" class="form-control" placeholder="Nhập Họ Tên "required>
+                                <input type="text" name="name" class="form-control" value="${customer.getName()}" disabled required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Điện Thoại </label>
                             <div class="col-sm-8">
-                                <input type="number" name="phone" class="form-control" placeholder="Nhập Số Phone">
+                                <input type="number" name="phone" class="form-control" value="${customer.getPhone()}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Địa Chỉ</label>
                             <div class="col-sm-8">
-                                <input type="number" name="" class="form-control" placeholder="Nhập Địa Chỉ">
+                                <input type="text" name="" class="form-control" value="${customer.getAddress()}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Tuổi </label>
                             <div class="col-sm-8">
-                                <input type="number" name="age" class="form-control"  placeholder="Nhập Số Tuổi " required>
+                                <input type="number" name="age" class="form-control"  value="${customer.getAge()}" disabled required>
                             </div>
                         </div>
-                        <select name="gender" class="form-select form-select-sm" aria-label="Small select example" required>
-                            <option disabled selected value="" >Giới Tính</option>
-                            <option value="0">Nữ</option>
+                        <select name="gender" class="form-select form-select-sm" aria-label="Small select example" disabled required>
+                            <c:if test="${customer.getGender()==0}">
+                                <option value="0" selected >Nữ</option>
                             <option value="1">Nam </option>
+                            </c:if>
+                             <c:if test="${customer.getGender()==1}">
+                                <option value="0"  >Nữ</option>
+                            <option value="1" selected>Nam </option>
+                            </c:if>
                         </select>
                         <hr/>
                         <div class="input-group mb-3">

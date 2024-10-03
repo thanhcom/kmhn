@@ -10,6 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
+import thanhtrang.online.thanhtrang.Model.Admin;
 import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.Other;
 import thanhtrang.online.thanhtrang.Model.Receipt;
@@ -41,6 +42,7 @@ public class HibnateUtils {
         cof.addAnnotatedClass(Receipt.class);
         cof.addAnnotatedClass(EyeService.class);
         cof.addAnnotatedClass(Other.class);
+        cof.addAnnotatedClass(Admin.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder().
                                    applySettings(cof.getProperties()).build();
         Factory=cof.buildSessionFactory(registry);
