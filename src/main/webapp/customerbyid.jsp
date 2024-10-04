@@ -81,7 +81,6 @@
                         <th>Số Tiền </th>
                         <th>Ghi Chú </th>
                         <th>Phương Thức Thanh Toán</th>
-                        <th>Hành Động </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,7 +117,7 @@
                             <c:if test="${item.getPaymentMethod()==0}">                                    
                                         <td >Tiền Mặt </td>                                      
                             </c:if>
-                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa Hoá Đơn </a><a class="btn btn-outline-danger" role="button" aria-disabled="true" href="#">Xoá Hoá Đơn</a></td>
+                            <td></i><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a></td>
                             
                             
                         </tr>
@@ -138,7 +137,6 @@
                         <th>Đáp Ứng  </th>
                         <th>PD </th>
                         <th>ADD </th>
-                        <th>Hành Động </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -153,7 +151,7 @@
                             <td>${item.getEyeapproved()}</td>
                             <td>${item.getEyepd()}</td>
                             <td>${item.getEyeadd()}</td>
-                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Chỉnh Sửa</a><a class="btn btn-outline-danger" role="button" aria-disabled="true" href="#">Xoá</a></td>
+                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1 " role="button" aria-disabled="true" href="#">Xoá</a></td>
                         </tr>
                     </c:forEach>
                    
@@ -169,7 +167,6 @@
                         <th>Ngày Tháng </th>
                         <th>Tên Dịch Vụ</th>
                         <th>Số Tiền</th>
-                        <th>Hành Động </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,7 +184,7 @@
                                 
                                 <td><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>
                             </c:if>
-                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Chỉnh Sửa</a><a class="btn btn-outline-danger" role="button" aria-disabled="true" href="#">Xoá</a></td>
+                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1 " role="button" aria-disabled="true" href="#">Xoá</a></td>
                         </tr>
                     </c:forEach>
                    

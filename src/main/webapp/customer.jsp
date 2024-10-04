@@ -42,12 +42,12 @@
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
                         <li class="nav-item">
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" href="customer">Khách Hàng</a>
                         </li>
-                            <a class="nav-link" href="other">Other</a>
+                        <a class="nav-link" href="other">Other</a>
                         </li>
-                         
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Chức Năng  
@@ -78,6 +78,7 @@
                         <th>Số Điện Thoại </th>
                         <th>Tuổi</th>
                         <th>Giới Tính</th>
+                        <th>Địa Chỉ </th>
                         <th>Hoá Đơn </th>
                         <th>Dịch Vụ #</th>
                     </tr>
@@ -93,18 +94,27 @@
                             <td >${item.getPhone()}</td>
                             <td>${item.getAge()}</td>
                             <c:if test="${item.getGender()!=0}">                                    
-                                        <td>Nam</td>                                   
+                                <td>Nam</td>                                   
                             </c:if> 
                             <c:if test="${item.getGender()==0}">                                    
-                                        <td >Nữ </td>                                      
+                                <td >Nữ </td>                                      
                             </c:if>
+                            <td>${item.getAddress()}</td>
                             <td>${item.getReceipt().size()}</td>
                             <td>${item.getOther().size()}</td>
                             <td>
                                 <a class="btn btn-outline-warning" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">Chi Tiết </a>
-                                <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="receiptbycustomer?id=${item.getId()}">HĐ</a>
-                                <a class="btn btn-outline-secondary" role="button" aria-disabled="true" href="customerdetail?id=${item.getId()}">#</a></td>
-                            
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        </li><a class="dropdown-item" aria-disabled="true" href="receiptbycustomer?id=${item.getId()}">Tạo Hoá Đơn</a></li>
+                                        <li><a class="dropdown-item" aria-disabled="true" href="receiptbycustomer_eyeonly?id=${item.getId()}">Đo Mắt</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Dịch Vụ #</a></li>
+                                    </ul>
+                                </div>                 
                         </tr>
                     </c:forEach>
                 </tbody>                

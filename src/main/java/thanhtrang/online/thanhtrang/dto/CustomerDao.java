@@ -80,7 +80,7 @@ public class CustomerDao {
 
     public static void main(String[] args) {
         CustomerDao cdao = new CustomerDao();
-        cdao.FinByAge(18).forEach(action -> System.out.println(action.getGender()));
+        cdao.FinByAge(18).forEach(action -> System.out.println(action.getAddress()));
     }
 
 }
