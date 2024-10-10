@@ -78,9 +78,18 @@ public class CustomerDao {
         return list;
     }
 
-    public static void main(String[] args) {
-        CustomerDao cdao = new CustomerDao();
-        cdao.FinByAge(18).forEach(action -> System.out.println(action.getAddress()));
+    
+    public int CountAllCustomer()
+    {
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("select count(e) from Customer e");
+        Object one = q.getResultList().getFirst();
+        return Integer.parseInt(one.toString());
     }
 
+    public static void main(String[] args) {
+        CustomerDao cdao = new CustomerDao();
+        System.out.println(cdao.CountAllCustomer());
+        //cdao.FinByAge(18).forEach(action -> System.out.println(action.getAddress()));
+    }
 }

@@ -105,6 +105,7 @@ public class LoginCheck implements Filter {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession session =req.getSession();
+            
             log(req.getContextPath());
             log(req.getServletPath());
         

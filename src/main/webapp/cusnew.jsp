@@ -88,9 +88,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-4 col-form-label">Địa Chỉ</label>
+                            <label for="inputPassword3"  class="col-sm-4 col-form-label">Địa Chỉ</label>
                             <div class="col-sm-8">
-                                <input type="number" name="" class="form-control" placeholder="Nhập Địa Chỉ">
+                                <input type="text" name="address" class="form-control" placeholder="Nhập Địa Chỉ">
                             </div>
                         </div>
                         <div class="form-group row">

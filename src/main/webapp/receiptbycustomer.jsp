@@ -90,7 +90,7 @@
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Địa Chỉ</label>
                             <div class="col-sm-8">
-                                <input type="text" name="" class="form-control" value="${customer.getAddress()}" disabled>
+                                <input type="text" name="address" class="form-control" value="${customer.getAddress()}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">

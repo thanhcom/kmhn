@@ -52,6 +52,20 @@ public class AdminDao {
         return list;
     }
     
+    public Admin CheckLogin(String user, String pass) {
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("FROM Admin WHERE user =:CustomerName AND pass=:pass");
+        q.setParameter("CustomerName",user);
+        q.setParameter("pass",pass);
+        List<Admin> list = q.getResultList();
+        Admin A = null;
+       if(list.size()==1)
+       {
+           A=list.getFirst();
+       }
+       return A;
+    }
+    
     public String CheckUserExisted(Admin user) {
         String kq;
         Session ss = HibnateUtils.getFactory().openSession();
@@ -113,14 +127,18 @@ public class AdminDao {
     
     public static void main(String[] args) {
         //AdminDao dao = new AdminDao();
-        //Admin a = getInstance().FinByUserName("thanhcom");
-        Admin A = new Admin();
-        A.setEmail("anhchang00@gmail.com");
-        A.setFullname("Nguyen DAnh Thanh");
-        A.setId(1);
-        A.setPhone("0962100123");
-        A.setRole(1);
-        A.setUser("thanhcom");
-        System.out.println(getInstance().CheckUserExisted(A));
+        Admin a = getInstance().CheckLogin("thanhcom", "laodaica");
+//        Admin A = new Admin();
+//        A.setEmail("anhchang00@gmail.com");
+//        A.setFullname("Nguyen DAnh Thanh");
+//        A.setId(1);
+//        A.setPhone("0962100123");
+//        A.setRole(1);
+//        A.setUser("thanhcom");
+//        System.out.println(getInstance().CheckUserExisted(A));
+        if(a!=null)
+        System.out.println(a.getFullname()+"--Role :"+a.getRole());
+        else
+         System.out.println("Sai Tai Khoan");
 }
 }
