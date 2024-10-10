@@ -30,17 +30,24 @@ public class Customer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            var pagecurren = request.getParameter("pagecurren");
-            if(pagecurren==null)
+            String pagec = request.getParameter("pagecurren");
+            int pagecurren;
+            if(pagec==null)
             {
-             request.setAttribute("pagecurren", "1");   
+                pagecurren=1;
             }else
             {
-             request.setAttribute("pagecurren", pagecurren);   
+             pagecurren=Integer.parseInt(pagec);
+             
             }
             int size = CustomerDao.getInstance().CountAllCustomer();
-            int pagenumber = size/10;
-            System.out.println("So Trang"+pagenumber);
+            int pagenumber = size/50;
+            if(size%50!=0)
+            {
+                pagenumber+=1;
+            }
+            request.setAttribute("pagecurren", "1");
+            request.setAttribute("pagecurren", pagecurren);
             request.setAttribute("list", CustomerDao.getInstance().FinAll());
             request.setAttribute("pagenumber", pagenumber);
             request.getRequestDispatcher("customer.jsp").forward(request, response);
