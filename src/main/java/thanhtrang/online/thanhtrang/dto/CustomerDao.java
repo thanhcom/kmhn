@@ -15,26 +15,31 @@ import thanhtrang.online.thanhtrang.Model.Customer;
  * @author thanhcom
  */
 public class CustomerDao {
-    
+
     private static CustomerDao instance;
-    
-     public static CustomerDao getInstance()
-     {
-         if(instance ==null)
-         {
-             instance = new CustomerDao();
-         }
-         return instance;
-     }
+
+    public static CustomerDao getInstance() {
+        if (instance == null) {
+            instance = new CustomerDao();
+        }
+        return instance;
+    }
 
     private CustomerDao() {
     }
-     
-     
 
     public List<Customer> FinAll() {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer ORDER BY id DESC");
+        List<Customer> list = q.getResultList();
+        return list;
+    }
+
+    public List<Customer> FinByPage(int index, int number_Per_Page) {
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("FROM Customer ORDER BY id DESC");
+        q.setFirstResult(index);
+        q.setMaxResults(number_Per_Page);
         List<Customer> list = q.getResultList();
         return list;
     }
@@ -44,16 +49,16 @@ public class CustomerDao {
         Customer C = ss.get(Customer.class, ID);
         return C;
     }
-    
-     public List<Customer> FinByName(String Name) {
+
+    public List<Customer> FinByName(String Name) {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer WHERE name LIKE :name ORDER BY id DESC");
         q.setParameter("name", "%" + Name + "%");
         List<Customer> list = q.getResultList();
         return list;
     }
-     
-      public List<Customer> FinByNameAndPhone(String Name , String Phone) {
+
+    public List<Customer> FinByNameAndPhone(String Name, String Phone) {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer WHERE `name` LIKE :name OR phone LIKE :phone ORDER BY id DESC");
         q.setParameter("name", "%" + Name + "%");
@@ -69,7 +74,7 @@ public class CustomerDao {
         List<Customer> list = q.getResultList();
         return list;
     }
-    
+
     public List<Customer> FinByAge(int age) {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("FROM Customer WHERE age=:age ORDER BY id DESC");
@@ -78,9 +83,7 @@ public class CustomerDao {
         return list;
     }
 
-    
-    public int CountAllCustomer()
-    {
+    public int CountAllCustomer() {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("select count(e) from Customer e");
         Object one = q.getResultList().getFirst();
@@ -89,7 +92,7 @@ public class CustomerDao {
 
     public static void main(String[] args) {
         CustomerDao cdao = new CustomerDao();
-        System.out.println(cdao.CountAllCustomer());
-        //cdao.FinByAge(18).forEach(action -> System.out.println(action.getAddress()));
+        //System.out.println(cdao.CountAllCustomer());
+        cdao.FinByPage(0, 10).forEach(action -> System.out.println(action.getName()));
     }
 }

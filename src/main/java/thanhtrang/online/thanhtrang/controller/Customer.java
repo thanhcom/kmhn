@@ -32,6 +32,7 @@ public class Customer extends HttpServlet {
             throws ServletException, IOException {
             String pagec = request.getParameter("pagecurren");
             int pagecurren;
+            int record_per_page=50;
             if(pagec==null)
             {
                 pagecurren=1;
@@ -41,14 +42,13 @@ public class Customer extends HttpServlet {
              
             }
             int size = CustomerDao.getInstance().CountAllCustomer();
-            int pagenumber = size/50;
-            if(size%50!=0)
+            int pagenumber = size/record_per_page;
+            if(size%record_per_page!=0)
             {
                 pagenumber+=1;
             }
-            request.setAttribute("pagecurren", "1");
             request.setAttribute("pagecurren", pagecurren);
-            request.setAttribute("list", CustomerDao.getInstance().FinAll());
+            request.setAttribute("list", CustomerDao.getInstance().FinByPage((pagecurren-1)*record_per_page, record_per_page));
             request.setAttribute("pagenumber", pagenumber);
             request.getRequestDispatcher("customer.jsp").forward(request, response);
     }
