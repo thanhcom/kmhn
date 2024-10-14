@@ -112,7 +112,7 @@
                                         </li><a class="dropdown-item" aria-disabled="true" href="receiptbycustomer?id=${item.getId()}">Tạo Hoá Đơn</a></li>
                                         <li><a class="dropdown-item" aria-disabled="true" href="receiptbycustomer_eyeonly?id=${item.getId()}">Đo Mắt</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Dịch Vụ #</a></li>
+                                        <li><a class="dropdown-item" href="otherbycustomer?id=${item.getId()}">Dịch Vụ #</a></li>
                                     </ul>
                                 </div>                 
                         </tr>

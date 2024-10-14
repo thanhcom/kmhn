@@ -33,16 +33,7 @@ public class Other implements Serializable{
    private  String serviceName;
    private int servicePrice;
    private int paymentmethod;
-
-    public int getPaymentmethod() {
-        return paymentmethod;
-    }
-
-    public void setPaymentmethod(int paymentmethod) {
-        this.paymentmethod = paymentmethod;
-    }
-   
-   
+   private String note;
 
     public int getId() {
         return id;
@@ -83,5 +74,22 @@ public class Other implements Serializable{
     public void setServicePrice(int servicePrice) {
         this.servicePrice = servicePrice;
     }
-    
+
+    public int getPaymentmethod() {
+        return paymentmethod;
+    }
+
+    public void setPaymentmethod(int paymentmethod) {
+        this.paymentmethod = paymentmethod;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+   
+   
 }

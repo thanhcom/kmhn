@@ -69,11 +69,11 @@
             </div>
         </nav>
         <div class="container-fluid">
-            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Đo Mắt - ${customer.getName()}</span> </h1>
+            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Dịch Vụ Khác - ${customer.getName()}</span> </h1>
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <form action="createreceiptbycustomer_eyeonlysave" method="post">
+                    <form action="otherbycustomersave" method="post">
                         <div class="form-group row">
                             <input type="hidden" name="cid" value="${customer.getId()}"/>
                             <label for="inputEmail3" class="col-sm-4 col-form-label" >Họ Tên</label>
@@ -110,22 +110,29 @@
                             </c:if>
                         </select>
                         <hr/>
-                        <div class="input-group mb-3">
-                            <input type="text" name="SPHR" class="form-control" placeholder="SPHR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="CYLR" class="form-control" placeholder="CYLR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="AXR" class="form-control" placeholder="AXR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="ADD" class="form-control" placeholder="ADD" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <div class="form-group row">                            
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Tên Dịch Vụ </label> 
+                            <div class="col-sm-8">
+                                <input type="text" name="serviceName" class="form-control" placeholder="Nhập Tên Dịch Vụ #" required>
+                            </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" name="SPHL" class="form-control" placeholder="SPHL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="CYLL" class="form-control" placeholder="CYLL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="AXL" class="form-control" placeholder="AXL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="PD" class="form-control" placeholder="PD" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <div class="form-group row">                            
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Thành Tiền</label> 
+                            <div class="col-sm-8">
+                                <input type="numbern" name="servicePrice" class="form-control" placeholder="Nhập Số Tiền " required>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <input type="text" name="note" class="form-control" placeholder="Ghi Chú " aria-label="Username" aria-describedby="basic-addon1">
                             
+                            <select name="paymentmethod" class="form-select form-select-sm" aria-label="Small select example" id="validationDefault04" required>
+                            <option disabled selected value="">Thanh Toán </option>
+                            <option value="0">Tiền Mặt</option>
+                            <option value="1">Chuyển Khoản</option>
+                        </select>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" name="approved" class="form-control" placeholder="Đáp Ứng " aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
+                        
                         <hr/>
                         <div class="form-group row">
                             <div class="col-sm-10">
