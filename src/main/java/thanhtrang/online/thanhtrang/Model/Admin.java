@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author thanhcom
  */
 @Entity
-@Table(name = "Admin")
+@Table(name = "admin")
 public class Admin implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

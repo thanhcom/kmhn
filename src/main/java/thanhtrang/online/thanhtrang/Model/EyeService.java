@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @author thanhcom
  */
 @Entity
-@Table(name = "eyeService")
+@Table(name = "eyeservice")
 public class EyeService implements Serializable{
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
