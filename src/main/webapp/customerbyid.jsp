@@ -166,6 +166,7 @@
                     <tr>
                         <th>Ngày Tháng </th>
                         <th>Tên Dịch Vụ</th>
+                        <th>Ghi Chú  </th>
                         <th>Số Tiền</th>
                     </tr>
                 </thead>
@@ -176,6 +177,7 @@
                             <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
                            
                             <td>${item.getServiceName()}</td>
+                            <td>${item.note}</td>
                             <c:if test="${item.getPaymentmethod()==1}">
                                 
                                 <td class="text-bg-warning"><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>   

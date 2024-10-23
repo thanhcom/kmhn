@@ -6,7 +6,22 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginCheck</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/create</url-pattern>
+        <url-pattern>/createreceiptbycustomer</url-pattern>
+        <url-pattern>/createreceiptbycustomer_eyeonlysave</url-pattern>
+        <url-pattern>/currentmonth</url-pattern>
+        <url-pattern>/customer</url-pattern>
+        <url-pattern>/customerdetail</url-pattern>
+        <url-pattern>/hoadon</url-pattern>
+        <url-pattern>/otherbycustomer</url-pattern>
+        <url-pattern>/otherbycustomersave</url-pattern>
+        <url-pattern>/receiptbycustomer</url-pattern>
+        <url-pattern>/receiptbycustomer_eyeonly</url-pattern>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/today</url-pattern>
+        <url-pattern>/yesterday</url-pattern>
+        <url-pattern>/yestermonth</url-pattern> 
     </filter-mapping>
     <session-config>
         <session-timeout>
