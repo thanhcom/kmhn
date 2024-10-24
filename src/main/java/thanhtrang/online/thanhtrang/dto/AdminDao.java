@@ -44,12 +44,19 @@ public class AdminDao {
         return C;
     }
     
-    public List<Admin> FinByUserName(String username) {
+    public Admin FinByUserName(String username) {
         Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Admin WHERE user LIKE :CustomerName ORDER id DESC");
-        q.setParameter("CustomerName", "%" + username + "%");
-        List<Admin> list = q.getResultList();
-        return list;
+        Query q = ss.createQuery("FROM Admin WHERE user LIKE :CustomerName");
+        q.setParameter("CustomerName", username);
+        
+        if(!q.getResultList().isEmpty())
+        {
+            return (Admin) q.getResultList().getFirst();
+        }
+        else
+        {
+            return null;
+        }
     }
     
     public Admin CheckLogin(String user, String pass) {
