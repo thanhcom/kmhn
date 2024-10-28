@@ -56,7 +56,7 @@
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="cusnew.jsp">Tạo Hoá Đơn </a></li>
+                                <li><a class="dropdown-item" href="cusnew">Tạo Hoá Đơn </a></li>
                             </ul>
                         </li>
                     </ul>

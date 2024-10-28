@@ -42,7 +42,7 @@
                             <a class="nav-link" href="yestermonth">Tháng Trước</a>
                         </li>
                         <li class="nav-item">
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" href="customer">Khách Hàng</a>
                         </li>
                         <li class="nav-item">
@@ -56,7 +56,7 @@
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="cusnew.jsp">Tạo Hoá Đơn </a></li>
+                                <li><a class="dropdown-item" href="cusnew">Tạo Hoá Đơn </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,127 +71,144 @@
 
             <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning"><span class="text-primary">${customer.getName()} - ${customer.getPhone()} </span></span> </h1>
             <div class="border border-danger"> 
-            <h1> <p  class=".text-danger text-center mt-2">Phần Hoá Đơn</p> </h1>
-            <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Ngày Lập </th>
-                        <th>Gọng Kính  </th>
-                        <th>Tròng Kính </th>
-                        <th>Số Tiền </th>
-                        <th>Ghi Chú </th>
-                        <th>Phương Thức Thanh Toán</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="item" items="${customer.getReceipt()}">
-
+                <h1> <p  class=".text-danger text-center mt-2">Phần Hoá Đơn</p> </h1>
+                <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
+                    <thead>
                         <tr>
-                            <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
-                            <td>${item.getGkName()}
-                                <c:if test="${item.getGkPrice()!=0}">
-                                    <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getGkPrice()}" type = "number"/> 
-                                    </span>
-                                </c:if> 
-                            </td>
-                            <td>${item.getTkName()}
-                                <c:if test="${item.getTkPrice()!=0}">
-                                    <span class="badge text-bg-primary rounded-pill">
-                                        <fmt:formatNumber value = "${item.getTkPrice()}" type = "number"/> 
-                                    </span>
-                                </c:if> 
-                            </td>
-                            <c:if test="${item.getPaymentMethod()==1}">
-                                <c:set var="countck" value="${countck + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
-                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>   
-                            </c:if>
-                            <c:if test="${item.getPaymentMethod()==0}">
-                                <c:set var="count" value="${count + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
-                                <td><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>
-                            </c:if>
-                            <td>${item.getNote()}</td>
-                            <c:if test="${item.getPaymentMethod()!=0}">                                    
-                                        <td>Chuyển Khoản </td>                                   
-                            </c:if> 
-                            <c:if test="${item.getPaymentMethod()==0}">                                    
-                                        <td >Tiền Mặt </td>                                      
-                            </c:if>
-                            <td></i><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a></td>
-                            
-                            
+                            <th>Ngày Lập </th>
+                            <th>Gọng Kính  </th>
+                            <th>Tròng Kính </th>
+                            <th>Số Tiền </th>
+                            <th>Ghi Chú </th>
+                            <th>Phương Thức Thanh Toán</th>
                         </tr>
-                    </c:forEach>
-                   
-                </tbody>                
-            </table>      
+                    </thead>
+                    <tbody>
+                        <c:forEach var="item" items="${customer.getReceipt()}">
+
+                            <tr>
+                                <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
+                                <td>${item.getGkName()}
+                                    <c:if test="${item.getGkPrice()!=0}">
+                                        <span class="badge text-bg-primary rounded-pill">
+                                            <fmt:formatNumber value = "${item.getGkPrice()}" type = "number"/> 
+                                        </span>
+                                    </c:if> 
+                                </td>
+                                <td>${item.getTkName()}
+                                    <c:if test="${item.getTkPrice()!=0}">
+                                        <span class="badge text-bg-primary rounded-pill">
+                                            <fmt:formatNumber value = "${item.getTkPrice()}" type = "number"/> 
+                                        </span>
+                                    </c:if> 
+                                </td>
+                                <c:if test="${item.getPaymentMethod()==1}">
+                                    <c:set var="countck" value="${countck + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
+                                    <td class="text-bg-warning"><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>   
+                                </c:if>
+                                <c:if test="${item.getPaymentMethod()==0}">
+                                    <c:set var="count" value="${count + (item.getGkPrice()+item.getTkPrice())}" scope="page"/>
+                                    <td><fmt:formatNumber value = "${item.getGkPrice()+item.getTkPrice()}" type = "number"/></td>
+                                </c:if>
+                                <td>${item.getNote()}</td>
+                                <c:if test="${item.getPaymentMethod()!=0}">                                    
+                                    <td>Chuyển Khoản </td>                                   
+                                </c:if> 
+                                <c:if test="${item.getPaymentMethod()==0}">                                    
+                                    <td >Tiền Mặt </td>                                      
+                                </c:if>
+
+                                 <c:if test="${account.role==1}"> 
+                                    <td>
+                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                    </td>
+                                </c:if>
+
+
+
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>                
+                </table>      
             </div>
             <br/>    
             <div class="border border-primary"> 
-            <h1> <p  class=".text-danger text-center mt-2">Phần Đo Mắt </p> </h1>
-            <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Ngày Đo  </th>
-                        <th>Độ Kính   </th>
-                        <th>Đáp Ứng  </th>
-                        <th>PD </th>
-                        <th>ADD </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="item" items="${customer.getEyeService()}">
-
+                <h1> <p  class=".text-danger text-center mt-2">Phần Đo Mắt </p> </h1>
+                <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
+                    <thead>
                         <tr>
-                            <td class="text-uppercase text-danger fw-bold">${item.getEyedatetime()}</td>
-                            <td>
-                                <p>MP:<span class="badge text-bg-primary">${item.getEyesphr()}</span><span class="badge text-bg-info">${item.getEyecylr()==0?"":item.getEyecylr()}</span><span class="badge text-bg-danger">${item.getEyeaxr()==0?"":item.getEyeaxr()}</span></p>
-                                <p>MT:<span class="badge text-bg-primary">${item.getEyesphl()}</span><span class="badge text-bg-info">${item.getEyecyll()==0?"":item.getEyecyll()}</span><span class="badge text-bg-danger">${item.getEyeaxl()==0?"":item.getEyeaxl()}</span></p>
-                            </td>
-                            <td>${item.getEyeapproved()}</td>
-                            <td>${item.getEyepd()}</td>
-                            <td>${item.getEyeadd()}</td>
-                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1 " role="button" aria-disabled="true" href="#">Xoá</a></td>
+                            <th>Ngày Đo  </th>
+                            <th>Độ Kính   </th>
+                            <th>Đáp Ứng  </th>
+                            <th>PD </th>
+                            <th>ADD </th>
                         </tr>
-                    </c:forEach>
-                   
-                </tbody>                
-            </table> 
+                    </thead>
+                    <tbody>
+                        <c:forEach var="item" items="${customer.getEyeService()}">
+
+                            <tr>
+                                <td class="text-uppercase text-danger fw-bold">${item.getEyedatetime()}</td>
+                                <td>
+                                    <p>MP:<span class="badge text-bg-primary">${item.getEyesphr()}</span><span class="badge text-bg-info">${item.getEyecylr()==0?"":item.getEyecylr()}</span><span class="badge text-bg-danger">${item.getEyeaxr()==0?"":item.getEyeaxr()}</span></p>
+                                    <p>MT:<span class="badge text-bg-primary">${item.getEyesphl()}</span><span class="badge text-bg-info">${item.getEyecyll()==0?"":item.getEyecyll()}</span><span class="badge text-bg-danger">${item.getEyeaxl()==0?"":item.getEyeaxl()}</span></p>
+                                </td>
+                                <td>${item.getEyeapproved()}</td>
+                                <td>${item.getEyepd()}</td>
+                                <td>${item.getEyeadd()}</td>
+                                <c:if test="${account.role==1}"> 
+                                    <td>
+                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                    </td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>                
+                </table> 
             </div>  
             <br/>
             <div class="border border-primary"> 
-            <h1> <p  class=".text-danger text-center mt-2">Phần Dịch Vụ Khác </p> </h1>
-            <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Ngày Tháng </th>
-                        <th>Tên Dịch Vụ</th>
-                        <th>Ghi Chú  </th>
-                        <th>Số Tiền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="item" items="${customer.getOther()}">
-
+                <h1> <p  class=".text-danger text-center mt-2">Phần Dịch Vụ Khác </p> </h1>
+                <table id="example" class="table table-striped table-hover align-middle" style="width:100%">
+                    <thead>
                         <tr>
-                            <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
-                           
-                            <td>${item.getServiceName()}</td>
-                            <td>${item.note}</td>
-                            <c:if test="${item.getPaymentmethod()==1}">
-                                
-                                <td class="text-bg-warning"><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>   
-                            </c:if>
-                            <c:if test="${item.getPaymentmethod()==0}">
-                                
-                                <td><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>
-                            </c:if>
-                            <td><a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a><a class="btn btn-outline-danger ms-1 " role="button" aria-disabled="true" href="#">Xoá</a></td>
+                            <th>Ngày Tháng </th>
+                            <th>Tên Dịch Vụ</th>
+                            <th>Ghi Chú  </th>
+                            <th>Số Tiền</th>
                         </tr>
-                    </c:forEach>
-                   
-                </tbody>                
-            </table> 
+                    </thead>
+                    <tbody>
+                        <c:forEach var="item" items="${customer.getOther()}">
+
+                            <tr>
+                                <td class="text-uppercase text-danger fw-bold">${item.getDate()}</td>
+
+                                <td>${item.getServiceName()}</td>
+                                <td>${item.note}</td>
+                                <c:if test="${item.getPaymentmethod()==1}">
+
+                                    <td class="text-bg-warning"><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>   
+                                </c:if>
+                                <c:if test="${item.getPaymentmethod()==0}">
+
+                                    <td><fmt:formatNumber value = "${item.getServicePrice()}" type = "number"/></td>
+                                </c:if>
+                                <c:if test="${account.role==1}"> 
+                                    <td>
+                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                    </td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+
+                    </tbody>                
+                </table> 
             </div> 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -33,7 +33,6 @@ public class Other implements Serializable{
    private  String serviceName;
    private int servicePrice;
    private int paymentmethod;
-   private String Note;
    private String note;
 
     public int getId() {

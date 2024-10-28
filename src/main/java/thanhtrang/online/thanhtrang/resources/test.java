@@ -14,7 +14,7 @@ import thanhtrang.online.thanhtrang.dto.AdminDao;
  */
 public class test {
     public static void main(String[] args) {
-        String password = "laodaicaha";
+        String password = "12345678";
         String password1 = "laodaicaha11";
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
         System.out.println(bcryptHashString);
