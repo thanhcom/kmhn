@@ -2,26 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.other;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.Objects;
-import thanhtrang.online.thanhtrang.Model.Admin;
-import thanhtrang.online.thanhtrang.dto.AdminDao;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.hibernate.Session;
+import thanhtrang.online.thanhtrang.HibnateUtils;
+import thanhtrang.online.thanhtrang.Model.Other;
+import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "DoLogin", urlPatterns = {"/dologin"})
-public class DoLogin extends HttpServlet {
+@WebServlet(name = "OtherByCustomerSave", urlPatterns = {"/otherbycustomersave"})
+public class OtherByCustomerSave extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +35,22 @@ public class DoLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        Admin A = AdminDao.getInstance().FinByUserName(user);        
-        if (!Objects.isNull(A)) {
-            BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(), A.getPass());
-            if (user.equals(A.getUser()) && result.verified) {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", A);
-                response.sendRedirect("home");
-            } else {
-                request.setAttribute("ERR", "Nhập Sai Mật Khẩu ");
-                request.getRequestDispatcher("login").forward(request, response);
-            }
-        } else {
-            request.setAttribute("ERR", "Tài Khoản Không Tồn Tại  ");
-            request.getRequestDispatcher("login").forward(request, response);
-
-        }
-
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        Session ss = HibnateUtils.getFactory().openSession();        
+        thanhtrang.online.thanhtrang.Model.Customer C = CustomerDao.getInstance().FinById(Integer.parseInt(request.getParameter("cid")));
+        Other O = new Other();
+        O.setCustomer(C);
+        O.setDate(formatter.format(date));
+        O.setPaymentmethod(Integer.parseInt(request.getParameter("paymentmethod")));
+        O.setServiceName(request.getParameter("serviceName"));
+        O.setServicePrice(Integer.parseInt(request.getParameter("servicePrice")));
+        O.setNote(request.getParameter("note"));
+        ss.getTransaction().begin();
+        ss.save(O);
+        ss.getTransaction().commit();
+        request.getRequestDispatcher("customer/customerdetail?id="+C.getId()).forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,16 +10,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import thanhtrang.online.thanhtrang.Model.Receipt;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import org.hibernate.Session;
+import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "HoaDon", urlPatterns = {"/hoadon"})
-public class HoaDon extends HttpServlet {
+@WebServlet(name = "Home", urlPatterns = {"/home"})
+public class Home extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +36,19 @@ public class HoaDon extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-            List<Receipt> list = ReceiptDao.getInstance().FindAll();
-            request.setAttribute("listCustomer", list);
-            request.getRequestDispatcher("demo_2.jsp").forward(request, response);
+            Session ss = HibnateUtils.getFactory().openSession();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Instant now = Instant.now();
+            Instant yesterday = now.minus(6, ChronoUnit.DAYS);
+            String str = formatter.format(Date.from(yesterday));
+            String str1 = formatter.format(Date.from(now));
+            /*
+            Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
+            q.setParameter("date", str);
+            List<Customer> listCustomer = q.getResultList();*/
+            request.setAttribute("str", str);
+            request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByDaytoDay(str, str1));
+            request.getRequestDispatcher("oder/home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +63,7 @@ public class HoaDon extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+             processRequest(request, response);
     }
 
     /**

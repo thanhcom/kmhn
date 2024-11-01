@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,19 +10,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import org.hibernate.Session;
-import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.Other;
-import thanhtrang.online.thanhtrang.dto.CustomerDao;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "OtherByCustomerSave", urlPatterns = {"/otherbycustomersave"})
-public class OtherByCustomerSave extends HttpServlet {
+@WebServlet(name = "Yestermonth", urlPatterns = {"/yestermonth"})
+public class Yestermonth extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +34,17 @@ public class OtherByCustomerSave extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        Session ss = HibnateUtils.getFactory().openSession();        
-        thanhtrang.online.thanhtrang.Model.Customer C = CustomerDao.getInstance().FinById(Integer.parseInt(request.getParameter("cid")));
-        Other O = new Other();
-        O.setCustomer(C);
-        O.setDate(formatter.format(date));
-        O.setPaymentmethod(Integer.parseInt(request.getParameter("paymentmethod")));
-        O.setServiceName(request.getParameter("serviceName"));
-        O.setServicePrice(Integer.parseInt(request.getParameter("servicePrice")));
-        O.setNote(request.getParameter("note"));
-        ss.getTransaction().begin();
-        ss.save(O);
-        ss.getTransaction().commit();
-        request.getRequestDispatcher("customerdetail?id="+C.getId()).forward(request, response);
-        
+        Date today = new Date();  
+        Calendar calendar = Calendar.getInstance();  
+        calendar.setTime(today);  
+        calendar.add(Calendar.MONTH, 0);  
+        calendar.set(Calendar.DAY_OF_MONTH, 1);  
+        calendar.add(Calendar.DATE, -1);  
+        Date lastDayOfMonth = calendar.getTime();  
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM");         
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByYesterMonth());
+        request.setAttribute("datetime", sdf.format(lastDayOfMonth));
+        request.getRequestDispatcher("oder/yestermonth.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,18 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import thanhtrang.online.thanhtrang.dto.ReceiptDao;
+import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "Yestermonth", urlPatterns = {"/yestermonth"})
-public class Yestermonth extends HttpServlet {
+@WebServlet(name = "ReceiptByCustomer", urlPatterns = {"/receiptbycustomer"})
+public class ReceiptByCustomer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +30,9 @@ public class Yestermonth extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Date today = new Date();  
-        Calendar calendar = Calendar.getInstance();  
-        calendar.setTime(today);  
-        calendar.add(Calendar.MONTH, 0);  
-        calendar.set(Calendar.DAY_OF_MONTH, 1);  
-        calendar.add(Calendar.DATE, -1);  
-        Date lastDayOfMonth = calendar.getTime();  
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM");         
-        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByYesterMonth());
-        request.setAttribute("datetime", sdf.format(lastDayOfMonth));
-        request.getRequestDispatcher("yestermonth.jsp").forward(request, response);
+            String id = request.getParameter("id");
+            request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(id)));
+            request.getRequestDispatcher("oder/receiptbycustomer.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.customer;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import thanhtrang.online.thanhtrang.dto.ReceiptDao;
+import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "Yesterday", urlPatterns = {"/yesterday"})
-public class Yesterday extends HttpServlet {
+@WebServlet(name = "SearchCustomer", urlPatterns = {"/searchcustomer"})
+public class SearchCustomer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,18 +31,10 @@ public class Yesterday extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Instant now = Instant.now();
-        Instant yesterday = now.minus(1, ChronoUnit.DAYS);
-        String str = formatter.format(Date.from(yesterday));
-        Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date =:date ORDER BY C.id DESC");
-        q.setParameter("date", str);
-        List<Customer> listCustomer = q.getResultList();*/
-        
-        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByYesterday());
-        request.getRequestDispatcher("yesterday.jsp").forward(request, response);
+            String username = request.getParameter("username");
+            System.out.println("thanhtrang.online"+username);
+            request.setAttribute("list", CustomerDao.getInstance().FinByNameAndPhone(username, username));
+            request.getRequestDispatcher("customer/customer.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

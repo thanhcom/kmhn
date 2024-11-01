@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.authenticate;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,14 +10,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "ReceiptByCustomer", urlPatterns = {"/receiptbycustomer"})
-public class ReceiptByCustomer extends HttpServlet {
+@WebServlet(name = "Login", urlPatterns = {"/login"})
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +29,7 @@ public class ReceiptByCustomer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String id = request.getParameter("id");
-            request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(id)));
-            request.getRequestDispatcher("receiptbycustomer.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

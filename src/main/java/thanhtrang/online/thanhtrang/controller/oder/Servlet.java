@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,14 +10,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import thanhtrang.online.thanhtrang.dto.ReceiptDao;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import thanhtrang.online.thanhtrang.HibnateUtils;
+import thanhtrang.online.thanhtrang.Model.Other;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "Currentmonth", urlPatterns = {"/currentmonth"})
-public class Currentmonth extends HttpServlet {
+@WebServlet(name = "Servlet", urlPatterns = {"/"})
+public class Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,15 +34,11 @@ public class Currentmonth extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
-        Instant now = Instant.now();
-        String str = formatter.format(Date.from(now))+"-01";
         Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
-        q.setParameter("date", str);
-        List<Customer> listCustomer = q.getResultList();*/        
-        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByCurrentMonth());
-        request.getRequestDispatcher("currentmonth.jsp").forward(request, response);
+            Query q = ss.createQuery("FROM Other ORDER BY Id DESC");
+            List<Other> listOther = q.getResultList();
+            request.setAttribute("listOther", listOther);
+       request.getRequestDispatcher("other/other.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.customer;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,14 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import thanhtrang.online.thanhtrang.dto.ReceiptDao;
+import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
- * @author thanhcomtoday
+ * @author thanhcom
  */
-@WebServlet(name = "Today", urlPatterns = {"/today"})
-public class Today extends HttpServlet {
+@WebServlet(name = "Customer", urlPatterns = {"/customer"})
+public class Customer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,18 +30,27 @@ public class Today extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String str = formatter.format(date);
-        Session ss = HibnateUtils.getFactory().openSession();
-        Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date =:date ORDER BY C.id DESC");
-        q.setParameter("date", str);
-        List<Customer> listCustomer = q.getResultList();
-        */
-        
-        
-        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByCurrentDay());
-        request.getRequestDispatcher("today.jsp").forward(request, response);
+            String pagec = request.getParameter("pagecurren");
+            int pagecurren;
+            int record_per_page=50;
+            if(pagec==null)
+            {
+                pagecurren=1;
+            }else
+            {
+             pagecurren=Integer.parseInt(pagec);
+             
+            }
+            int size = CustomerDao.getInstance().CountAllCustomer();
+            int pagenumber = size/record_per_page;
+            if(size%record_per_page!=0)
+            {
+                pagenumber+=1;
+            }
+            request.setAttribute("pagecurren", pagecurren);
+            request.setAttribute("list", CustomerDao.getInstance().FinByPage((pagecurren-1)*record_per_page, record_per_page));
+            request.setAttribute("pagenumber", pagenumber);
+            request.getRequestDispatcher("customer/customer.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

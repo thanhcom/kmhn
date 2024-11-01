@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -70,7 +70,7 @@ public class CreateReceiptByCustomer extends HttpServlet {
         e.setEyedatetime(formatter.format(date));
         ss.save(e);
         ss.getTransaction().commit();
-        request.getRequestDispatcher("customerdetail?id="+c.getId()).forward(request, response);
+        request.getRequestDispatcher("oder/customerdetail?id="+c.getId()).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

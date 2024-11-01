@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,14 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import thanhtrang.online.thanhtrang.dto.CustomerDao;
+import thanhtrang.online.thanhtrang.dto.ReceiptDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "CustomerDetail", urlPatterns = {"/customerdetail"})
-public class CustomerDetail extends HttpServlet {
+@WebServlet(name = "Currentmonth", urlPatterns = {"/currentmonth"})
+public class Currentmonth extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,10 +30,15 @@ public class CustomerDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String id = request.getParameter("id");
-            
-            request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(id)));
-            request.getRequestDispatcher("customerbyid.jsp").forward(request, response);
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        Instant now = Instant.now();
+        String str = formatter.format(Date.from(now))+"-01";
+        Session ss = HibnateUtils.getFactory().openSession();
+        Query q = ss.createQuery("FROM Customer C INNER JOIN Receipt R ON C.id = R.customer.id WHERE R.date >=:date ORDER BY C.id DESC");
+        q.setParameter("date", str);
+        List<Customer> listCustomer = q.getResultList();*/        
+        request.setAttribute("listCustomer", ReceiptDao.getInstance().FindByCurrentMonth());
+        request.getRequestDispatcher("oder/currentmonth.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

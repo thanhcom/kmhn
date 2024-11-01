@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package thanhtrang.online.thanhtrang.controller;
+package thanhtrang.online.thanhtrang.controller.oder;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,8 +16,8 @@ import thanhtrang.online.thanhtrang.dto.CustomerDao;
  *
  * @author thanhcom
  */
-@WebServlet(name = "Customer", urlPatterns = {"/customer"})
-public class Customer extends HttpServlet {
+@WebServlet(name = "ReceiptByCustomer_EyeOnly", urlPatterns = {"/receiptbycustomer_eyeonly"})
+public class ReceiptByCustomer_EyeOnly extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +30,9 @@ public class Customer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String pagec = request.getParameter("pagecurren");
-            int pagecurren;
-            int record_per_page=50;
-            if(pagec==null)
-            {
-                pagecurren=1;
-            }else
-            {
-             pagecurren=Integer.parseInt(pagec);
-             
-            }
-            int size = CustomerDao.getInstance().CountAllCustomer();
-            int pagenumber = size/record_per_page;
-            if(size%record_per_page!=0)
-            {
-                pagenumber+=1;
-            }
-            request.setAttribute("pagecurren", pagecurren);
-            request.setAttribute("list", CustomerDao.getInstance().FinByPage((pagecurren-1)*record_per_page, record_per_page));
-            request.setAttribute("pagenumber", pagenumber);
-            request.getRequestDispatcher("customer.jsp").forward(request, response);
+        String id = request.getParameter("id");
+            request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(id)));
+            request.getRequestDispatcher("oder/receiptbycustomer_eyeonly.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
