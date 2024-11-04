@@ -70,34 +70,34 @@
             </div>
         </nav>
         <div class="container-fluid">
-
-            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Tạo Mới Đơn Kính</span> </h1>
+            <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning">Tạo Dịch Vụ Khác</span> </h1>
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <form action="create" method="post">
+                    <form action="createothersave" method="post">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Họ Tên </label>
+                            
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Họ Tên</label>
                             <div class="col-sm-8">
-                                <input type="text" name="name" class="form-control" placeholder="Nhập Họ Tên "required>
+                                <input type="text" name="name" class="form-control" placeholder="Nhập Tên" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Điện Thoại </label>
                             <div class="col-sm-8">
-                                <input type="number" name="phone" class="form-control" placeholder="Nhập Số Phone">
+                                <input type="number" name="phone" class="form-control" placeholder="Nhập Số Điện Thoại" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword3"  class="col-sm-4 col-form-label">Địa Chỉ</label>
+                            <label for="inputPassword3" class="col-sm-4 col-form-label">Địa Chỉ</label>
                             <div class="col-sm-8">
-                                <input type="text" name="address" class="form-control" placeholder="Nhập Địa Chỉ">
+                                <input type="text" name="address" class="form-control" placeholder="Nhập Địa Chỉ" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Tuổi </label>
                             <div class="col-sm-8">
-                                <input type="number" name="age" class="form-control"  placeholder="Nhập Số Tuổi " required>
+                                <input type="number" name="age" class="form-control"  placeholder="Nhập Tuổi" required>
                             </div>
                         </div>
                         <select name="gender" class="form-select form-select-sm" aria-label="Small select example" required>
@@ -106,38 +106,29 @@
                             <option value="1">Nam </option>
                         </select>
                         <hr/>
-                        <div class="input-group mb-3">
-                            <input type="text" name="SPHR" class="form-control" placeholder="SPHR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="CYLR" class="form-control" placeholder="CYLR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="AXR" class="form-control" placeholder="AXR" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="ADD" class="form-control" placeholder="ADD" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <div class="form-group row">                            
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Tên Dịch Vụ </label> 
+                            <div class="col-sm-8">
+                                <input type="text" name="serviceName" class="form-control" placeholder="Nhập Tên Dịch Vụ #" required>
+                            </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" name="SPHL" class="form-control" placeholder="SPHL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="CYLL" class="form-control" placeholder="CYLL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="AXL" class="form-control" placeholder="AXL" aria-label="Username" aria-describedby="basic-addon1" required>
-                            <input type="text" name="PD" class="form-control" placeholder="PD" aria-label="Username" aria-describedby="basic-addon1" required>
-                            
+                        <div class="form-group row">                            
+                            <label for="inputEmail3" class="col-sm-4 col-form-label" >Thành Tiền</label> 
+                            <div class="col-sm-8">
+                                <input type="numbern" name="servicePrice" class="form-control" placeholder="Nhập Số Tiền " required>
+                            </div>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" name="approved" class="form-control" placeholder="Đáp Ứng " aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <hr/>
-                        <div class="input-group mb-3">
-                            <input type="text" name="gkname" class="form-control" placeholder="Tên Gọng " aria-label="Username" aria-describedby="basic-addon1">
-                            <input type="text" name="gkprice" class="form-control" placeholder="Giá Tiền " aria-label="Username" aria-describedby="basic-addon1"required>
-                            <input type="text" name="tkname" class="form-control" placeholder="Tên Tròng" aria-label="Username" aria-describedby="basic-addon1" >
-                            <input type="text" name="tkprice" class="form-control" placeholder="Giá Tiền"  aria-label="Username" aria-describedby="basic-addon1" required>
-                        </div>
+                        
                         <div class="input-group mb-4">
                             <input type="text" name="note" class="form-control" placeholder="Ghi Chú " aria-label="Username" aria-describedby="basic-addon1">
-                            <input type="text" name="discount" class="form-control" placeholder="Khuyến Mại %" aria-label="Username" aria-describedby="basic-addon1" required>
+                            
                             <select name="paymentmethod" class="form-select form-select-sm" aria-label="Small select example" id="validationDefault04" required>
                             <option disabled selected value="">Thanh Toán </option>
                             <option value="0">Tiền Mặt</option>
                             <option value="1">Chuyển Khoản</option>
                         </select>
                         </div>
+                        
                         <hr/>
                         <div class="form-group row">
                             <div class="col-sm-10">

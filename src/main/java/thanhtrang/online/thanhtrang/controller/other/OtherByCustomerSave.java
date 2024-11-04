@@ -49,7 +49,7 @@ public class OtherByCustomerSave extends HttpServlet {
         ss.getTransaction().begin();
         ss.save(O);
         ss.getTransaction().commit();
-        request.getRequestDispatcher("customer/customerdetail?id="+C.getId()).forward(request, response);
+        request.getRequestDispatcher("/customerdetail?id="+C.getId()).forward(request, response);
         
     }
 
