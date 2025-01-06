@@ -48,7 +48,7 @@ public class Create extends HttpServlet {
         c.setGender(Integer.parseInt(request.getParameter("gender")));
         c.setAge(Integer.parseInt(request.getParameter("age")));
         ss.getTransaction().begin();
-        ss.save(c);
+        ss.persist(c);
         
         Receipt r = new Receipt();
         r.setCustomer(c);
@@ -60,7 +60,7 @@ public class Create extends HttpServlet {
         r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
         r.setNote(request.getParameter("note"));
         r.setDate(formatter.format(date));
-        ss.save(r);
+        ss.persist(r);
         
         EyeService e = new EyeService();
         e.setCustomer(c);
@@ -74,9 +74,9 @@ public class Create extends HttpServlet {
         e.setEyepd(Integer.parseInt(request.getParameter("PD")));
         e.setEyeapproved(request.getParameter("approved"));
         e.setEyedatetime(formatter.format(date));
-        ss.save(e);
+        ss.persist(e);
         ss.getTransaction().commit();
-        request.getRequestDispatcher("home").forward(request, response);
+        response.sendRedirect("home");
         
        
     }

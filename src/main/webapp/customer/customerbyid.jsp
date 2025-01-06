@@ -18,10 +18,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Kính mắt Hà Nội <%=java.time.LocalDate.now()%></title> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
-        <link href="https://cdn.datatables.net/v/bs5/dt-2.1.5/datatables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/v/bs5/dt-2.1.5/datatables.min.css" rel="stylesheet">  
+        <script type="text/javascript">
+            
+           function  DeleteOther(cid,oid){
+                if(confirm("Are You Sure To Delete ?"))
+                {
+                    window.location="otherdelete?cid="+cid+"&oid="+oid;
+                    //alert("otherdelete?cid="+cid+"&oid="+oid);
+                }
+            }
+            
+            function  DeleteEyeService(cid,eid){
+                if(confirm("Are You Sure To Delete ?"))
+                {
+                    window.location="eyedelete?cid="+cid+"&eid="+eid;
+                    //alert("otherdelete?cid="+cid+"&oid="+oid);
+                }
+            }
+            
+            function  DeleteOder(cid,rid){
+                if(confirm("Are You Sure To Delete ?"))
+                {
+                    window.location="oderdlete?cid="+cid+"&rid="+rid;
+                    //alert("otherdelete?cid="+cid+"&oid="+oid);
+                }
+            }
+        </script>
     </head>
     <body>
-        <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark"> 
+        <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">            
             <div class="container-fluid">
                 <a class="navbar-brand" href="home">Kính Mắt Hà  Nội</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,8 +94,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
-
+        <div class="container-fluid">            
             <h1 class="center_sun4">Kính Mắt Hà  Nội CS2 :<span class="badge rounded-pill text-bg-warning"><span class="text-primary">${customer.getName()} - ${customer.getPhone()} </span></span> </h1>
             <div class="border border-danger"> 
                 <h1> <p  class=".text-danger text-center mt-2">Phần Hoá Đơn</p> </h1>
@@ -119,10 +144,10 @@
                                     <td >Tiền Mặt </td>                                      
                                 </c:if>
 
-                                 <c:if test="${account.role==1}"> 
+                                <c:if test="${account.role==1}"> 
                                     <td>
-                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
-                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="receiptbycustomer_edit?cid=${customer.id}&rid=${item.id}">Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" onclick="DeleteOder(`${customer.id}`,`${item.id}`)">Xoá</a>
                                     </td>
                                 </c:if>
 
@@ -161,8 +186,8 @@
                                 <td>${item.getEyeadd()}</td>
                                 <c:if test="${account.role==1}"> 
                                     <td>
-                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
-                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="receiptbycustomer_eyeonlyedit?cid=${customer.id}&eid=${item.eyeid}" >Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" onclick="DeleteEyeService(`${customer.id}`,`${item.eyeid}`)">Xoá</a>
                                     </td>
                                 </c:if>
                             </tr>
@@ -201,8 +226,8 @@
                                 </c:if>
                                 <c:if test="${account.role==1}"> 
                                     <td>
-                                        <a class="btn btn-outline-primary" role="button" aria-disabled="true" href="#">Sửa</a>
-                                        <a class="btn btn-outline-danger ms-1" role="button" aria-disabled="true" href="#">Xoá</a>
+                                        <a class="btn btn-outline-primary" href="otherbycustomer_edit?cid=${customer.id}&oid=${item.id}">Sửa</a>
+                                        <a class="btn btn-outline-danger ms-1 "  onclick="DeleteOther(`${customer.id}`,${item.id})" >Xoá</a>
                                     </td>
                                 </c:if>
                             </tr>

@@ -45,9 +45,9 @@ public class OtherDao {
         return list;
     }
 
-    public OtherDao FindById(int id) {
+    public Other FindById(int id) {
         Session ss = HibnateUtils.getFactory().openSession();
-        OtherDao e = ss.get(OtherDao.class, id);
+        Other e = ss.get(Other.class, id);
         return e;
     }
 

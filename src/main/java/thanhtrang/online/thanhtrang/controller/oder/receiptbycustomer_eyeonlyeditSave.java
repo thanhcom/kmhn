@@ -15,16 +15,14 @@ import java.util.Date;
 import org.hibernate.Session;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.EyeService;
-import thanhtrang.online.thanhtrang.Model.Receipt;
-import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.dto.CustomerDao;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "CreateReceiptByCustomer", urlPatterns = {"/createreceiptbycustomer"})
-public class CreateReceiptByCustomer extends HttpServlet {
+@WebServlet(name = "CreateReceiptByCustomer_EyeOnlySave", urlPatterns = {"/receiptbycustomer_eyeonlyeditsave"})
+public class receiptbycustomer_eyeonlyeditSave extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,26 +35,23 @@ public class CreateReceiptByCustomer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+       String cid = request.getParameter("cid");
+       String eid = request.getParameter("eid");
+       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         Session ss = HibnateUtils.getFactory().openSession();        
-        Customer c= CustomerDao.getInstance().FinById(Integer.parseInt(request.getParameter("cid")));
+        thanhtrang.online.thanhtrang.Model.Customer c= CustomerDao.getInstance().FinById(Integer.parseInt(cid));
         ss.getTransaction().begin();
-        
-        
-        Receipt r = new Receipt();
-        r.setCustomer(c);
-        r.setGkName(request.getParameter("gkname"));
-        r.setTkName(request.getParameter("tkname"));
-        r.setGkPrice(Integer.parseInt(request.getParameter("gkprice")));
-        r.setTkPrice(Integer.parseInt(request.getParameter("tkprice")));
-        r.setDiscount(Integer.parseInt(request.getParameter("discount")));
-        r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
-        r.setNote(request.getParameter("note"));
-        r.setDate(formatter.format(date));
-        ss.save(r);
-        
+//        Customer c= new Customer();
+//        c.setId(Integer.parseInt(cid));
+//        c.setName(request.getParameter("name"));
+//        c.setPhone(request.getParameter("phone"));
+//        c.setAddress(request.getParameter("address"));
+//        c.setGender(Integer.parseInt(request.getParameter("gender")));
+//        c.setAge(Integer.parseInt(request.getParameter("age")));
+//        ss.merge(c);
         EyeService e = new EyeService();
+        e.setEyeid(Integer.parseInt(eid));
         e.setCustomer(c);
         e.setEyesphl(Double.parseDouble(request.getParameter("SPHL")));
         e.setEyesphr(Double.parseDouble(request.getParameter("SPHR")));
@@ -67,8 +62,8 @@ public class CreateReceiptByCustomer extends HttpServlet {
         e.setEyeadd(Double.parseDouble(request.getParameter("ADD")));
         e.setEyepd(Integer.parseInt(request.getParameter("PD")));
         e.setEyeapproved(request.getParameter("approved"));
-        e.setEyedatetime(formatter.format(date));
-        ss.save(e);
+        //e.setEyedatetime(formatter.format(date));
+        ss.merge(e);
         ss.getTransaction().commit();
         request.getRequestDispatcher("customerdetail?id="+c.getId()).forward(request, response);
     }

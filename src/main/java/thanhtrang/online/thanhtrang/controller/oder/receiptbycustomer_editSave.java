@@ -14,17 +14,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.hibernate.Session;
 import thanhtrang.online.thanhtrang.HibnateUtils;
-import thanhtrang.online.thanhtrang.Model.EyeService;
-import thanhtrang.online.thanhtrang.Model.Receipt;
 import thanhtrang.online.thanhtrang.Model.Customer;
-import thanhtrang.online.thanhtrang.dto.CustomerDao;
+import thanhtrang.online.thanhtrang.Model.Receipt;
 
 /**
  *
  * @author thanhcom
  */
-@WebServlet(name = "CreateReceiptByCustomer", urlPatterns = {"/createreceiptbycustomer"})
-public class CreateReceiptByCustomer extends HttpServlet {
+@WebServlet(name = "receiptbycustomer_editSave", urlPatterns = {"/receiptbycustomer_editsave"})
+public class receiptbycustomer_editSave extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +34,25 @@ public class CreateReceiptByCustomer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            throws ServletException, IOException {    
+        String cid = request.getParameter("cid");
+       String rid = request.getParameter("rid");
+       SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         Session ss = HibnateUtils.getFactory().openSession();        
-        Customer c= CustomerDao.getInstance().FinById(Integer.parseInt(request.getParameter("cid")));
+        //thanhtrang.online.thanhtrang.Model.Customer c= CustomerDao.getInstance().FinById(Integer.parseInt(cid));
         ss.getTransaction().begin();
-        
+        Customer c= new Customer();
+        c.setId(Integer.parseInt(cid));
+        c.setName(request.getParameter("name"));
+        c.setPhone(request.getParameter("phone"));
+        c.setAddress(request.getParameter("address"));
+        c.setGender(Integer.parseInt(request.getParameter("gender")));
+        c.setAge(Integer.parseInt(request.getParameter("age")));
+        ss.merge(c);
         
         Receipt r = new Receipt();
+        r.setId(Integer.parseInt(rid));
         r.setCustomer(c);
         r.setGkName(request.getParameter("gkname"));
         r.setTkName(request.getParameter("tkname"));
@@ -53,24 +61,10 @@ public class CreateReceiptByCustomer extends HttpServlet {
         r.setDiscount(Integer.parseInt(request.getParameter("discount")));
         r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
         r.setNote(request.getParameter("note"));
-        r.setDate(formatter.format(date));
-        ss.save(r);
-        
-        EyeService e = new EyeService();
-        e.setCustomer(c);
-        e.setEyesphl(Double.parseDouble(request.getParameter("SPHL")));
-        e.setEyesphr(Double.parseDouble(request.getParameter("SPHR")));
-        e.setEyecylr(Double.parseDouble(request.getParameter("CYLR")));
-        e.setEyecyll(Double.parseDouble(request.getParameter("CYLL")));
-        e.setEyeaxr(Integer.parseInt(request.getParameter("AXR")));
-        e.setEyeaxl(Integer.parseInt(request.getParameter("AXL")));
-        e.setEyeadd(Double.parseDouble(request.getParameter("ADD")));
-        e.setEyepd(Integer.parseInt(request.getParameter("PD")));
-        e.setEyeapproved(request.getParameter("approved"));
-        e.setEyedatetime(formatter.format(date));
-        ss.save(e);
+        //r.setDate(formatter.format(date));
+        ss.merge(r);
         ss.getTransaction().commit();
-        request.getRequestDispatcher("customerdetail?id="+c.getId()).forward(request, response);
+        request.getRequestDispatcher("customerdetail?id="+cid).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
