@@ -61,7 +61,7 @@ public class receiptbycustomer_editSave extends HttpServlet {
         r.setDiscount(Integer.parseInt(request.getParameter("discount")));
         r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
         r.setNote(request.getParameter("note"));
-        //r.setDate(formatter.format(date));
+        r.setDate(request.getParameter("date"));
         ss.merge(r);
         ss.getTransaction().commit();
         request.getRequestDispatcher("customerdetail?id="+cid).forward(request, response);

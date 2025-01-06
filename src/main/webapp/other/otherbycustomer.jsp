@@ -177,7 +177,7 @@
                     <div class="modal-body">
                         <p> Họ Và Tên : ${sessionScope.account.fullname}</p>
                         <p> Số Phone  : ${sessionScope.account.phone}</p>
-                        <p> Số Email  : ${sessionScope.account.email}</p>
+                        <p> Email     : ${sessionScope.account.email}</p>
                         <c:if test="${sessionScope.account.role==1}">
                            <p> Quyền Hạn : ADMIN</p>   
                         </c:if>

@@ -30,8 +30,7 @@ public class receiptbycustomer_edit extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {    
-        System.out.println("GOOOOOOOOOOo");
+            throws ServletException, IOException {  
             String cid = request.getParameter("cid");
             String rid = request.getParameter("rid");
             request.setAttribute("customer", CustomerDao.getInstance().FinById(Integer.parseInt(cid)));
