@@ -12,11 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.Session;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.Receipt;
 import thanhtrang.online.thanhtrang.Model.EyeService;
+import thanhtrang.online.thanhtrang.SendPostWithHttpClient;
 
 /**
  *
@@ -35,8 +38,8 @@ public class Create extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException, Exception {
+        SendPostWithHttpClient client = new  SendPostWithHttpClient();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         Session ss = HibnateUtils.getFactory().openSession();        
@@ -76,6 +79,7 @@ public class Create extends HttpServlet {
         e.setEyedatetime(formatter.format(date));
         ss.persist(e);
         ss.getTransaction().commit();
+        client.SendRequest(e, c, r);
         response.sendRedirect("home");
         
        
@@ -93,7 +97,11 @@ public class Create extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Create.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -107,7 +115,11 @@ public class Create extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Create.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
