@@ -50,6 +50,28 @@ pipeline {
             }
         }
 
+        stage('Delete old image') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Delete war file to remote server..."
+                        scp -o StrictHostKeyChecking=no docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/*.war
+                    '''
+                }
+            }
+        }
+
+        stage('Delete old file') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Delete file to remote server..."
+                        scp -o StrictHostKeyChecking=no docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn
+                    '''
+                }
+            }
+        }
+
         stage('Thực thi lệnh SSH') {
                         steps {
                             sshagent(['ssh-remote']) {
