@@ -55,7 +55,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete war file to remote server..."
-                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps/kmhn.war
+                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn.war
                     '''
                 }
             }
@@ -66,13 +66,13 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete file to remote server..."
-                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps/kmhn
+                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn
                     '''
                 }
             }
         }
 
-        stage('Copy WAR vào container') {
+        stage('Copy WAR vào container Tomcat') {
             steps {
                 sshagent(['ssh-remote']) {
                     sh '''
@@ -83,10 +83,10 @@ pipeline {
     }
 }
 
-        stage('Thực thi lệnh SSH') {
+        stage('Thực thi lệnh SSH restart Tomcat container') {
                         steps {
                             sshagent(['ssh-remote']) {
-                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker stop Tomcat.11'
+                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker restart Tomcat.11'
                         }
                     }
                 }
