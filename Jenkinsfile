@@ -38,15 +38,13 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
-        }
 
-    stages {
-            stage('Thực thi lệnh SSH') {
-                steps {
-                    sshagent(['ssh-remote']) {
-                        sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker stop Tomcat.11'
-                }   
-            }
+        stage('Thực thi lệnh SSH') {
+                        steps {
+                            sshagent(['ssh-remote']) {
+                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker stop Tomcat.11'
+                        }
+                    }
+                }
         }
-    }
 }
