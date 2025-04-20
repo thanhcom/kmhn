@@ -55,7 +55,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete war file to remote server..."
-                        ssh -o StrictHostKeyChecking=no docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps/*.war
+                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps/*.war
                     '''
                 }
             }
@@ -66,7 +66,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete file to remote server..."
-                        ssh -o StrictHostKeyChecking=no docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps/kmhn
+                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec b9826cf96981 rm -rf /usr/local/tomcat/webapps
                     '''
                 }
             }
