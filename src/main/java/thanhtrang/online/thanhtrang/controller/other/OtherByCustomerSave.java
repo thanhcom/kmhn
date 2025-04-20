@@ -47,7 +47,7 @@ public class OtherByCustomerSave extends HttpServlet {
         O.setServicePrice(Integer.parseInt(request.getParameter("servicePrice")));
         O.setNote(request.getParameter("note"));
         ss.getTransaction().begin();
-        ss.save(O);
+        ss.persist(O);
         ss.getTransaction().commit();
         request.getRequestDispatcher("/customerdetail?id="+C.getId()).forward(request, response);
         

@@ -53,7 +53,7 @@ public class CreateReceiptByCustomer_EyeOnlySave extends HttpServlet {
         e.setEyepd(Integer.parseInt(request.getParameter("PD")));
         e.setEyeapproved(request.getParameter("approved"));
         e.setEyedatetime(formatter.format(date));
-        ss.save(e);
+        ss.persist(e);
         ss.getTransaction().commit();
         request.getRequestDispatcher("customerdetail?id="+c.getId()).forward(request, response);
     }

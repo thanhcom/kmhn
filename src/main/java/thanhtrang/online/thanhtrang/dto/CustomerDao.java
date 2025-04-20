@@ -86,7 +86,7 @@ public class CustomerDao {
     public int CountAllCustomer() {
         Session ss = HibnateUtils.getFactory().openSession();
         Query q = ss.createQuery("select count(e) from Customer e");
-        Object one = q.getResultList().getFirst();
+        Object one = q.getResultList().get(0);
         return Integer.parseInt(one.toString());
     }
 
