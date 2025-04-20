@@ -20,7 +20,7 @@ public class SendPostWithHttpClient {
                     .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\""+c.getName()+"\",\"phone\":\""+c.getPhone()+"\","
                             + "\"totalpay\":\""+(r.getTkPrice()+r.getGkPrice())+"\",\"time\":\""+r.getDate()+"\"}"))
                     .build();
-            
+            //hay
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("Response: " + response.body());
         }
