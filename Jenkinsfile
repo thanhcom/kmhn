@@ -39,6 +39,17 @@ pipeline {
             }
         }
 
+        stage('Copy WAR to Server') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Copying WAR file to remote server..."
+                        scp -o StrictHostKeyChecking=no target/*.war thanhcom@server.thanhtrang.online:/home/thanhcom/
+                    '''
+                }
+            }
+        }
+
         stage('Thực thi lệnh SSH') {
                         steps {
                             sshagent(['ssh-remote']) {
