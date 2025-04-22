@@ -189,7 +189,7 @@ public class ReceiptDao {
 
     public static void main(String[] args) {
         ReceiptDao dao = new ReceiptDao();
-        dao.FindByGkName("TK").forEach(action -> System.out.println("ID: " + action.getId() + "---Name :" + action.getCustomer().getEyeService().getLast().getEyeadd()+ "----------  Ten trong  :" + action.getTkName()));
+       // dao.FindByGkName("TK").forEach(action -> System.out.println("ID: " + action.getId() + "---Name :" + action.getCustomer().getEyeService().getLast().getEyeadd()+ "----------  Ten trong  :" + action.getTkName()));
     }
 
 }

@@ -51,7 +51,7 @@ public class AdminDao {
         
         if(!q.getResultList().isEmpty())
         {
-            return (Admin) q.getResultList().getFirst();
+            return (Admin) q.getResultList().get(0);
         }
         else
         {
@@ -68,7 +68,7 @@ public class AdminDao {
         Admin A = null;
        if(list.size()==1)
        {
-           A=list.getFirst();
+           A=list.get(0);
        }
        return A;
     }
