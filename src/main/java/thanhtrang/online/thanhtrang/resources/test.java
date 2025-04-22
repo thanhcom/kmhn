@@ -4,18 +4,16 @@
  */
 package thanhtrang.online.thanhtrang.resources;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import thanhtrang.online.thanhtrang.BCryptEncode;
-import thanhtrang.online.thanhtrang.Model.Customer;
-import thanhtrang.online.thanhtrang.Model.EyeService;
-import thanhtrang.online.thanhtrang.Model.Receipt;
-import thanhtrang.online.thanhtrang.SendPostWithHttpClient;
+import thanhtrang.online.thanhtrang.dto.AdminDao;
 
 /**
  *
  * @author thanhcom
  */
 public class test {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         //String password = "12345678";
         String password1 = "laodaicaha";
         BCryptEncode b = new BCryptEncode();
@@ -30,15 +28,6 @@ public class test {
 //        {
 //            System.out.println("User:"+A.getFullname());
 //        }
-        SendPostWithHttpClient client = new  SendPostWithHttpClient();
-        EyeService eyeService = new EyeService();
-        Customer c = new Customer();
-        c.setName("Hello Usser Thanhf");
-        c.setPhone("0962100123");
-        Receipt r = new Receipt();
-        r.setGkPrice(550);
-        r.setTkPrice(350);
-        client.SendRequest(eyeService, c, r);
     }
     
 }

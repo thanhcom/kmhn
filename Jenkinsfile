@@ -72,7 +72,7 @@ pipeline {
             }
         }
 
-        stage('Copy WAR vào container Tomcat') {
+        stage('Copy WAR -> container Tomcat') {
             steps {
                 sshagent(['ssh-remote']) {
                     sh '''
@@ -83,7 +83,7 @@ pipeline {
     }
 }
 
-        stage('Thực thi lệnh SSH restart Tomcat container') {
+        stage('SSH restart Tomcat container') {
                         steps {
                             sshagent(['ssh-remote']) {
                                 sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker restart Tomcat.11'

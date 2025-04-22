@@ -21,7 +21,7 @@ import thanhtrang.online.thanhtrang.dto.CustomerDao;
  *
  * @author thanhcom
  */
-@WebServlet(name = "CreateReceiptByCustomer_EyeOnlySave", urlPatterns = {"/receiptbycustomer_eyeonlyeditsave"})
+@WebServlet(name = "receiptbycustomer_eyeonlyeditSave", urlPatterns = {"/receiptbycustomer_eyeonlyeditsave"})
 public class receiptbycustomer_eyeonlyeditSave extends HttpServlet {
 
     /**
