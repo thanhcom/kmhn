@@ -12,11 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.Session;
 import thanhtrang.online.thanhtrang.HibnateUtils;
 import thanhtrang.online.thanhtrang.Model.Customer;
 import thanhtrang.online.thanhtrang.Model.Receipt;
 import thanhtrang.online.thanhtrang.Model.EyeService;
+import thanhtrang.online.thanhtrang.SendPostWithHttpClient;
 
 /**
  *
@@ -36,47 +39,52 @@ public class Create extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        Session ss = HibnateUtils.getFactory().openSession();        
-        Customer c= new Customer();
-        
-        c.setName(request.getParameter("name"));
-        c.setPhone(request.getParameter("phone"));
-        c.setAddress(request.getParameter("address"));
-        c.setGender(Integer.parseInt(request.getParameter("gender")));
-        c.setAge(Integer.parseInt(request.getParameter("age")));
-        ss.getTransaction().begin();
-        ss.persist(c);
-        
-        Receipt r = new Receipt();
-        r.setCustomer(c);
-        r.setGkName(request.getParameter("gkname"));
-        r.setTkName(request.getParameter("tkname"));
-        r.setGkPrice(Integer.parseInt(request.getParameter("gkprice")));
-        r.setTkPrice(Integer.parseInt(request.getParameter("tkprice")));
-        r.setDiscount(Integer.parseInt(request.getParameter("discount")));
-        r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
-        r.setNote(request.getParameter("note"));
-        r.setDate(formatter.format(date));
-        ss.persist(r);
-        
-        EyeService e = new EyeService();
-        e.setCustomer(c);
-        e.setEyesphl(Double.parseDouble(request.getParameter("SPHL")));
-        e.setEyesphr(Double.parseDouble(request.getParameter("SPHR")));
-        e.setEyecylr(Double.parseDouble(request.getParameter("CYLR")));
-        e.setEyecyll(Double.parseDouble(request.getParameter("CYLL")));
-        e.setEyeaxr(Integer.parseInt(request.getParameter("AXR")));
-        e.setEyeaxl(Integer.parseInt(request.getParameter("AXL")));
-        e.setEyeadd(Double.parseDouble(request.getParameter("ADD")));
-        e.setEyepd(Integer.parseInt(request.getParameter("PD")));
-        e.setEyeapproved(request.getParameter("approved"));
-        e.setEyedatetime(formatter.format(date));
-        ss.persist(e);
-        ss.getTransaction().commit();
-        response.sendRedirect("home");
+        try {
+            SendPostWithHttpClient client = new  SendPostWithHttpClient();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            Session ss = HibnateUtils.getFactory().openSession();
+            Customer c= new Customer();
+            
+            c.setName(request.getParameter("name"));
+            c.setPhone(request.getParameter("phone"));
+            c.setAddress(request.getParameter("address"));
+            c.setGender(Integer.parseInt(request.getParameter("gender")));
+            c.setAge(Integer.parseInt(request.getParameter("age")));
+            ss.getTransaction().begin();
+            ss.persist(c);
+            
+            Receipt r = new Receipt();
+            r.setCustomer(c);
+            r.setGkName(request.getParameter("gkname"));
+            r.setTkName(request.getParameter("tkname"));
+            r.setGkPrice(Integer.parseInt(request.getParameter("gkprice")));
+            r.setTkPrice(Integer.parseInt(request.getParameter("tkprice")));
+            r.setDiscount(Integer.parseInt(request.getParameter("discount")));
+            r.setPaymentMethod(Integer.parseInt(request.getParameter("paymentmethod")));
+            r.setNote(request.getParameter("note"));
+            r.setDate(formatter.format(date));
+            ss.persist(r);
+            
+            EyeService e = new EyeService();
+            e.setCustomer(c);
+            e.setEyesphl(Double.parseDouble(request.getParameter("SPHL")));
+            e.setEyesphr(Double.parseDouble(request.getParameter("SPHR")));
+            e.setEyecylr(Double.parseDouble(request.getParameter("CYLR")));
+            e.setEyecyll(Double.parseDouble(request.getParameter("CYLL")));
+            e.setEyeaxr(Integer.parseInt(request.getParameter("AXR")));
+            e.setEyeaxl(Integer.parseInt(request.getParameter("AXL")));
+            e.setEyeadd(Double.parseDouble(request.getParameter("ADD")));
+            e.setEyepd(Integer.parseInt(request.getParameter("PD")));
+            e.setEyeapproved(request.getParameter("approved"));
+            e.setEyedatetime(formatter.format(date));
+            ss.persist(e);
+            ss.getTransaction().commit();
+            client.SendRequest(e, c, r);
+            response.sendRedirect("home");
+        } catch (Exception ex) {
+            Logger.getLogger(Create.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
        
     }
