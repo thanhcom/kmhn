@@ -33,7 +33,7 @@ public class HibnateUtils {
         Properties props = new Properties();
         props.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
         props.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-        props.put(Environment.URL, "jdbc:mysql://server.thanhtrang.online/KinhMatHaNoi");
+        props.put(Environment.URL, "jdbc:mysql://thanhcom1989.ddns.net/KinhMatHaNoi");
         props.put(Environment.USER, "root");
         props.put(Environment.PASS, "@12345");
         props.put(Environment.SHOW_SQL, "true");
