@@ -44,7 +44,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Copying WAR file to remote server..."
-                        scp -o StrictHostKeyChecking=no target/*.war thanhcom@server.thanhtrang.online:/home/thanhcom/
+                        scp -o StrictHostKeyChecking=no target/*.war thanhcom@thanhcom1989.ddns.net:/home/thanhcom/
                     '''
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete war file to remote server..."
-                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn.war
+                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn.war
                     '''
                 }
             }
@@ -66,7 +66,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                         echo "Delete file to remote server..."
-                        ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn
+                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn
                     '''
                 }
             }
@@ -77,7 +77,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                 echo "Copy WAR vào container Tomcat..."
-                ssh -o StrictHostKeyChecking=no thanhcom@server.thanhtrang.online "docker cp /home/thanhcom/*.war Tomcat.11:/usr/local/tomcat/webapps/"
+                ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net "docker cp /home/thanhcom/*.war Tomcat.11:/usr/local/tomcat/webapps/"
             '''
         }
     }
@@ -86,7 +86,7 @@ pipeline {
         stage('SSH restart Tomcat container') {
                         steps {
                             sshagent(['ssh-remote']) {
-                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom server.thanhtrang.online docker restart Tomcat.11'
+                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom thanhcom1989.ddns.net docker restart Tomcat.11'
                         }
                     }
                 }
