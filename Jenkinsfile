@@ -77,7 +77,7 @@ pipeline {
                 sshagent(['ssh-remote']) {
                     sh '''
                 echo "Copy WAR vào container Tomcat..."
-                ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net "docker cp /home/thanhcom/*.war Tomcat.11:/usr/local/tomcat/webapps/"
+                ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net "docker cp /home/thanhcom/kmhn.war Tomcat.11:/usr/local/tomcat/webapps/"
             '''
         }
     }
