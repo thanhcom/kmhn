@@ -17,7 +17,7 @@ public class SendPostWithHttpClient {
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://nodered.thanhtrang.online/api/notification"))
+                    .uri(URI.create("https://nodered.thanhcom.site/api/notification"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + c.getName() + "\",\"phone\":\"" + c.getPhone() + "\","
                             + "\"totalpay\":\"" + (r.getTkPrice() + r.getGkPrice()) + "\",\"time\":\"" + r.getDate() + "\"}"))
