@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -43,30 +42,52 @@ pipeline {
             steps {
                 sshagent(['ssh-remote']) {
                     sh '''
-                        echo "✅ Copying WAR file to remote server..."
-                        # Xoá folder app cũ đã giải nén nếu có (rất quan trọng để Tomcat redeploy)
-                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net '
-                            rm -rf /home/thanhcom/tomcat/webapps/kmhn.war
-                        '
-
-                        # Copy file .war mới
-                        scp -o StrictHostKeyChecking=no target/kmhn.war thanhcom@thanhcom1989.ddns.net:/home/thanhcom/tomcat/webapps/
-
-                        echo "🚀 WAR file copied to Tomcat webapps successfully"
+                        echo "Copying WAR file to remote server..."
+                        scp -o StrictHostKeyChecking=no target/*.war thanhcom@thanhcom1989.ddns.net:/home/thanhcom/
                     '''
                 }
             }
         }
 
-    }
-}
+        stage('Delete old image') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Delete war file to remote server..."
+                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn.war
+                    '''
+                }
+            }
+        }
+
+        stage('Delete old file') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Delete file to remote server..."
+                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net docker exec Tomcat.11 rm -rf /usr/local/tomcat/webapps/kmhn
+                    '''
+                }
+            }
+        }
+
+        stage('Copy WAR -> container Tomcat') {
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh '''
+                        echo "Copy WAR vào container Tomcat..."
+                        ssh -o StrictHostKeyChecking=no thanhcom@thanhcom1989.ddns.net "docker cp /home/thanhcom/kmhn.war Tomcat.11:/usr/local/tomcat/webapps/"
+                    '''
+                }
+            }
+        }
 
         stage('SSH restart Tomcat container') {
-                        steps {
-                            sshagent(['ssh-remote']) {
-                                sh 'ssh -o StrictHostKeyChecking=no -l thanhcom thanhcom1989.ddns.net docker restart Tomcat.11'
-                        }
-                    }
+            steps {
+                sshagent(['ssh-remote']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l thanhcom thanhcom1989.ddns.net docker restart Tomcat.11'
                 }
+            }
         }
+    }
 }
