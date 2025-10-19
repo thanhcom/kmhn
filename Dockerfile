@@ -8,7 +8,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # --- Stage 2: Runtime with Tomcat ---
-FROM tomcat:11-jdk17
+FROM tomcat:11.0.13-jdk21-temurin
 WORKDIR /usr/local/tomcat/webapps/
 
 # Xóa webapp mặc định của Tomcat (ROOT)
