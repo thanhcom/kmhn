@@ -68,7 +68,7 @@ pipeline {
         stage('SSH restart Tomcat container') {
             steps {
                 sshagent(['ssh-remote']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l thanhcom thanhcom1989.ddns.net docker restart Tomcat.11'
+                    sh 'ssh -o StrictHostKeyChecking=no -l thanhcom thanhcom1989.ddns.net docker restart tomcat11'
                 }
             }
         }
