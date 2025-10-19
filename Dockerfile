@@ -5,7 +5,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # --- Stage 2: Runtime ---
-FROM tomcat:10.1-jdk17
+FROM tomcat:11-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 RUN rm -rf ROOT
 COPY --from=build /app/target/kmhn.war ./ROOT.war
