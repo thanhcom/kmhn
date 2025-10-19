@@ -8,7 +8,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # --- Stage 2: Runtime with Tomcat ---
-FROM tomcat:10.1-jdk17
+FROM tomcat:11-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 
 # Xóa webapp mặc định của Tomcat (ROOT)
