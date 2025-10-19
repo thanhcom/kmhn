@@ -1,23 +1,23 @@
-# --- Stage 1: Build ---
+# --- Stage 1: Build với Maven ---
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy toàn bộ source vào container
+# Copy source code và build WAR
 COPY . .
-
-# Build project (tạo file JAR)
 RUN mvn clean package -DskipTests
 
-# --- Stage 2: Runtime ---
-FROM eclipse-temurin:17-jdk
-WORKDIR /app
+# --- Stage 2: Runtime với Tomcat 10 ---
+FROM tomcat:10.1-jdk17
+WORKDIR /usr/local/tomcat/webapps/
 
-# Copy JAR từ stage build
-COPY --from=build /app/target/*.jar app.jar
+# Xóa ứng dụng mặc định của Tomcat
+RUN rm -rf ROOT
 
-# Render cung cấp biến môi trường PORT -> cấu hình Spring Boot lắng nghe PORT này
-ENV PORT=8080
+# Copy WAR file build ở stage 1 và đặt tên là ROOT.war để Tomcat auto deploy
+COPY --from=build /app/target/kmhn.war ./ROOT.war
+
+# Render cung cấp PORT env, Tomcat mặc định 8080
 EXPOSE 8080
 
-# Lệnh chạy
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Chạy Tomcat
+CMD ["catalina.sh", "run"]
